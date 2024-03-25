@@ -11,7 +11,7 @@ const BlogBox = () => {
               width={260}
               height={150}
               className="rounded-md"
-              src={"/images/products/book.webp"}
+              src={"/images/products/ganj.jpg"}
               alt="alt"
             />
           </div>

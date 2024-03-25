@@ -9,13 +9,13 @@ const SlideBox = () => {
   return (
     <article className="sliderItem p-2 hover:pt-0 transition-all duration-300">
       <Link href={"/shop"} target={"_blank"}>
-        <div className="relative bg-white h-[25rem] w-72 rounded-lg">
+        <div className="relative bg-white h-[23rem] w-72 rounded-lg">
           <div className="flex justify-center items-center pt-4">
             <Image
               width={260}
               height={150}
               className="rounded-md"
-              src={"/images/products/book.webp"}
+              src={"/images/products/ganj.jpg"}
               alt="alt"
             />
           </div>
