@@ -137,7 +137,7 @@ const Footer = () => {
         </p>
         <HiOutlineArrowSmUp
           onClick={() => goTopCtrl()}
-          className="w-10 h-10 p-2 rounded-md bg-zinc-200 transition-all duration-500 hover:bg-indigo-400 hover:text-white border-2 border-indigo-500 cursor-pointer"
+          className="bg-yellow-500 fixed left-4 bottom-4 w-12 h-12 p-2 rounded-md bg-zinc-200 transition-all duration-500 hover:bg-indigo-400 hover:text-white border-2 border-black cursor-pointer text-black"
         />
       </div>
     </footer>
