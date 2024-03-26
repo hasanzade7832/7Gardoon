@@ -39,7 +39,7 @@ const Footer = () => {
             <ul className="flex flex-col gap-4 text-base sm:text-sm">
               <li>
                 <Link
-                  href={"/"}
+                  href={"/about"}
                   className="w-32 flex gap-1 items-center transition-all duration-300 hover:gap-3 hover:text-orange-400"
                 >
                   <LiaAngleLeftSolid />
@@ -48,7 +48,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  href={"/"}
+                  href={"/contact"}
                   className="w-32 flex gap-1 items-center transition-all duration-300 hover:gap-3 hover:text-orange-400"
                 >
                   <LiaAngleLeftSolid />
@@ -57,7 +57,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  href={"/"}
+                  href={"/help"}
                   className="w-32 flex gap-1 items-center transition-all duration-300 hover:gap-3 hover:text-orange-400"
                 >
                   <LiaAngleLeftSolid />
@@ -66,7 +66,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  href={"/"}
+                  href={"/blog"}
                   className="w-32 flex gap-1 items-center transition-all duration-300 hover:gap-3 hover:text-orange-400"
                 >
                   <LiaAngleLeftSolid />
@@ -80,7 +80,7 @@ const Footer = () => {
             <ul className="flex flex-col gap-4 text-base sm:text-sm">
               <li>
                 <Link
-                  href={"/"}
+                  href={"/help"}
                   className="w-32 flex gap-1 items-center transition-all duration-300 hover:gap-2 hover:text-orange-400"
                 >
                   <LiaAngleLeftSolid />
@@ -89,7 +89,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  href={"/"}
+                  href={"/help"}
                   className="w-32 flex gap-1 items-center transition-all duration-300 hover:gap-2 hover:text-orange-400"
                 >
                   <LiaAngleLeftSolid />
@@ -98,7 +98,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  href={"/"}
+                  href={"/help"}
                   className="w-36 flex gap-1 items-center transition-all duration-300 hover:gap-2 hover:text-orange-400"
                 >
                   <LiaAngleLeftSolid />
