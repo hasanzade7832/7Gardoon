@@ -2,6 +2,7 @@
 import ProductsSlider from "@/components/products-slider";
 import Categories from "@/components/graphic-cats";
 import Blogs from "@/components/blogs";
+import Banners from "@/components/banners";
 
 const Home = () => {
   return (
@@ -10,6 +11,7 @@ const Home = () => {
       <Categories />
       <ProductsSlider title="اپیکیشن ها" linkComp="/" />
       <ProductsSlider title="کتاب ها" linkComp="/" />
+      <Banners />
       <Blogs />
     </div>
   );
