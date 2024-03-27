@@ -5,7 +5,7 @@ import Footer from "@/components/footer";
 const Layout = ({ children }) => {
   return (
     <html lang="fa-IR">
-      <body>
+      <body className="mt-20">
         <Header />
         {children}
         <Footer />
