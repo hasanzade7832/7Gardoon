@@ -61,7 +61,7 @@ const SingleBlug = () => {
       </section>
       <section className="flex flex-col gap-4">
         {/* <h2 className="text-xl">مطالب مرتبط</h2> */}
-        <RelatedPosts title={"مقالات مرتبط"}/>
+        <RelatedPosts title={"مقالات مرتبط"} />
       </section>
       <section className="flex flex-col gap-6">
         <h2 className="text-xl">دیدگاهها</h2>

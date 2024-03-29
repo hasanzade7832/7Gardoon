@@ -101,6 +101,13 @@ const Header = () => {
                     </a>
                   </Link>
                 </li>
+                <li>
+                  <Link legacyBehavior href="/dashboard">
+                    <a className="w-32 h-10 rounded-md bg-zinc-200 flex justify-center items-center transition-all duration-300 hover:bg-orange-400 hover:text-white">
+                      داشبورد
+                    </a>
+                  </Link>
+                </li>
               </ul>
             </nav>
             <div className="flex flex-col items-end gap-2">
@@ -136,19 +143,21 @@ const Header = () => {
             </div>
             <div className="flex gap-4 items-center w-[20rem] justify-end">
               <div>
-                <Link href={"/account"} ><IoPersonSharp className="bg-zinc-400 text-white rounded p-2 w-12 h-12" /></Link>
+                <Link href={"/account"}>
+                  <IoPersonSharp className="bg-zinc-400 text-white rounded p-2 w-12 h-12" />
+                </Link>
               </div>
-             
+
               <Link href={"/cart"}>
-              <div className="flex gap-2 justify-center bg-orange-400 p-2 items-center rounded-md">
-                <div className="text-orange-500 bg-white rounded-full w-8 h-8 flex justify-center items-center">
-                  0
+                <div className="flex gap-2 justify-center bg-orange-400 p-2 items-center rounded-md">
+                  <div className="text-orange-500 bg-white rounded-full w-8 h-8 flex justify-center items-center">
+                    0
+                  </div>
+                  <div className="text-white">سبد خرید</div>
+                  <div className="text-orange-500 bg-white rounded-lg w-8 h-8 flex justify-center items-center">
+                    <LuShoppingCart className="cursor-pointer w-6 h-6" />
+                  </div>
                 </div>
-                <div className="text-white">سبد خرید</div>
-                <div className="text-orange-500 bg-white rounded-lg w-8 h-8 flex justify-center items-center">
-                  <LuShoppingCart className= "cursor-pointer w-6 h-6" />
-                </div>
-              </div>
               </Link>
               {/* //////////////////////// */}
             </div>
