@@ -30,7 +30,7 @@ const AllBannerForms = ({ setBannerDetail, setRandNumForBannerClick }) => {
       .then((res) => {
         setBanners(res.data.banners);
         setNumberOfPage(
-          Array.from(Array(Math.ceil(res.data.allBannersNum / 2)).keys())
+          Array.from(Array(Math.ceil(res.data.allBannersNum / 10)).keys())
         );
       })
       .catch((err) => console.log(err));
@@ -68,7 +68,7 @@ const AllBannerForms = ({ setBannerDetail, setRandNumForBannerClick }) => {
         ) : (
           numberOfPage.map((data, i) => (
             <button
-              className="bg-indigo-500 text-white w-8 h-8 flex justify-center items-center rounded"
+              className="bg-indigo-500 text-white w-8 h-8 flex justify-center items-center rounded transition-all duration-500 hover:bg-orange-500"
               onClick={() => {
                 setPageNumber(data + 1);
                 setBanners([]);
