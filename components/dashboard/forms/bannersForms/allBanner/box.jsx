@@ -2,11 +2,14 @@
 
 import Image from "next/image";
 
-const Box = ({ data, setBannerDetail }) => {
+const Box = ({ data, setBannerDetail, setRandNumForBannerClick }) => {
   console.log("setBannerDetail", setBannerDetail);
   return (
     <div
-      onClick={() => setBannerDetail(data._id)}
+      onClick={() => {
+        setBannerDetail(data._id);
+        setRandNumForBannerClick(Math.random());
+      }}
       className="cursor-pointer p-6 w-full rounded-lg bg-zinc-100 border-2 border-zinc-200 transition-all duration-500 hover:border-orange-400"
     >
       <Image

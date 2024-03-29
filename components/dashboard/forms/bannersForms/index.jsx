@@ -7,13 +7,19 @@ import DetailsBannerForms from "../detailsBanner";
 
 const BannerForms = () => {
   const [bannerDetail, setBannerDetail] = useState("");
+  const [randNumForBannerClick, setRandNumForBannerClick] = useState(1);
   const [allOrNew, setAllOrNew] = useState(
-    <AllBannerForms setBannerDetail={setBannerDetail} />
+    <AllBannerForms
+      setBannerDetail={setBannerDetail}
+      setRandNumForBannerClick={setRandNumForBannerClick}
+    />
   );
 
   useEffect(() => {
-    setAllOrNew(<DetailsBannerForms bannerId={bannerDetail} />);
-  }, [bannerDetail]);
+    if (bannerDetail != "") {
+      setAllOrNew(<DetailsBannerForms bannerId={bannerDetail} />);
+    }
+  }, [bannerDetail, randNumForBannerClick]);
 
   return (
     <div className="flex flex-col gap-8">
@@ -22,7 +28,12 @@ const BannerForms = () => {
         <div className="flex justify-end items-center gap-2">
           <button
             onClick={() =>
-              setAllOrNew(<AllBannerForms setBannerDetail={setBannerDetail} />)
+              setAllOrNew(
+                <AllBannerForms
+                  setBannerDetail={setBannerDetail}
+                  setRandNumForBannerClick={setRandNumForBannerClick}
+                />
+              )
             }
             className="px-3 py-1 bg-indigo-600 text-white transition-all duration-500 hover:bg-orange-500"
           >

@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const AllBannerForms = ({ setBannerDetail }) => {
+const AllBannerForms = ({ setBannerDetail, setRandNumForBannerClick }) => {
   console.log("setBannerDetail", setBannerDetail);
   const goTopCtrl = () => {
     window.scrollTo({
@@ -39,7 +39,8 @@ const AllBannerForms = ({ setBannerDetail }) => {
   return (
     <div className="p-4 flex flex-col gap-8">
       <div className="flex flex-col gap-6 ">
-        {banners.length < 1 ? (
+        {/* //در اینجا baanners.length بود */}
+        {numberOfPage[0] == -1 ? (
           <div className="flex justify-center items-center p-12">
             <Image
               alt="loading"
@@ -50,7 +51,12 @@ const AllBannerForms = ({ setBannerDetail }) => {
           </div>
         ) : (
           banners.map((ba, i) => (
-            <Box key={i} data={ba} setBannerDetail={setBannerDetail} />
+            <Box
+              key={i}
+              data={ba}
+              setBannerDetail={setBannerDetail}
+              setRandNumForBannerClick={setRandNumForBannerClick}
+            />
           ))
         )}
       </div>

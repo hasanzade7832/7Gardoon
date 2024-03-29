@@ -3,12 +3,17 @@ import { useRef, useEffect, useState } from "react";
 import axios from "axios";
 
 const DetailsBannerForms = ({ bannerId }) => {
+  const formKeysNotSubber = (event) => {
+    if (event.key == "Enter") {
+      event.preventDefault();
+    }
+  };
   const imageUrlRef = useRef();
   const imageAltRef = useRef();
   const imageLinkRef = useRef();
   const imageSituationRef = useRef();
 
-  const submitter = (e) => {
+  const updater = (e) => {
     e.preventDefault();
     const formData = {
       goalId: bannerId,
@@ -22,6 +27,18 @@ const DetailsBannerForms = ({ bannerId }) => {
     axios
       .post(url, formData)
       .then((d) => console.log("ok"))
+      .catch((e) => console.log("error"));
+  };
+
+  const remover = () => {
+    const formData = {
+      goalId: bannerId,
+    };
+    const url = `https://7gardoon-server.liara.run/api/deleteBanners`;
+
+    axios
+      .post(url, formData)
+      .then((d) => console.log("removed"))
       .catch((e) => console.log("error"));
   };
 
@@ -49,8 +66,20 @@ const DetailsBannerForms = ({ bannerId }) => {
 
   return (
     <div className="flex flex-col gap-8">
-      <h2 className="text-orange-500">جزئیات بنر</h2>
-      <form onSubmit={submitter} className="flex flex-col gap-6">
+      <div className="flex justify-between items-center">
+        <h2 className="text-orange-500">جزئیات بنر</h2>
+        <button
+          onClick={() => remover()}
+          className="bg-rose-600 text-white px-4 py-1 rounded-md text-xs"
+        >
+          حذف بنر
+        </button>
+      </div>
+      <form
+        onKeyDown={formKeysNotSubber}
+        onSubmit={updater}
+        className="flex flex-col gap-6"
+      >
         <div className="flex flex-col gap-2">
           <div>آدرس جدید عکس</div>
           <input
