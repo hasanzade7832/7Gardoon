@@ -10,8 +10,9 @@ const Box = ({ data, setBannerDetail, setRandNumForBannerClick }) => {
         setBannerDetail(data._id);
         setRandNumForBannerClick(Math.random());
       }}
-      className="cursor-pointer p-6 w-full rounded-lg bg-zinc-100 border-2 border-zinc-200 transition-all duration-500 hover:border-orange-400"
+      className="relative flex justify-between items-center cursor-pointer p-6 w-full rounded-lg bg-zinc-100 border-2 border-zinc-200 transition-all duration-500 hover:border-orange-400"
     >
+      {/* <div className="flex justify-start items-center"> */}
       <Image
         className="rounded-lg"
         src={data.image}
@@ -20,7 +21,8 @@ const Box = ({ data, setBannerDetail, setRandNumForBannerClick }) => {
         width={400}
         height={200}
       />
-      <div className="flex justify-end items-center gap-3">
+      {/* </div> */}
+      <div className="flex items-center gap-3 absolute bottom-3 left-3">
         {data.situation == true ? (
           <div className="text-xs bg-green-600 text-white px-3 py-1 rounded">
             روشن

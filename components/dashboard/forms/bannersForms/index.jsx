@@ -35,13 +35,13 @@ const BannerForms = () => {
                 />
               )
             }
-            className="px-3 py-1 bg-indigo-600 text-white transition-all duration-500 hover:bg-orange-500"
+            className="flex justify-center items-center w-32 h-10 px-3 py-1 bg-indigo-600 text-white transition-all duration-500 hover:bg-orange-500"
           >
             همه
           </button>
           <button
             onClick={() => setAllOrNew(<NewBannerForms />)}
-            className="px-3 py-1 bg-indigo-600 text-white transition-all duration-500 hover:bg-orange-500"
+            className="flex justify-center items-center w-32 h-10 px-3 py-1 bg-indigo-600 text-white transition-all duration-500 hover:bg-orange-500"
           >
             بنر جدید
           </button>

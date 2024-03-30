@@ -21,8 +21,12 @@ const DetailsBannerForms = ({ bannerId }) => {
       imageAlt: imageAltRef.current.value,
       situation: imageSituationRef.current.value,
       link: imageLinkRef.current.value,
+      date: new Date().toLocaleDateString("fa-IR", {
+        hour: "2-digit",
+        minute: "2-digit",
+      }),
     };
-    const url = `https://7gardoon-server.liara.run/api/updateBanners`;
+    const url = `https://7gardoon-server.liara.run/api/updateBanners/${bannerId}`;
 
     axios
       .post(url, formData)
@@ -31,13 +35,10 @@ const DetailsBannerForms = ({ bannerId }) => {
   };
 
   const remover = () => {
-    const formData = {
-      goalId: bannerId,
-    };
-    const url = `https://7gardoon-server.liara.run/api/deleteBanners`;
+    const url = `https://7gardoon-server.liara.run/api/deleteBanners/${bannerId}`;
 
     axios
-      .post(url, formData)
+      .post(url)
       .then((d) => console.log("removed"))
       .catch((e) => console.log("error"));
   };
@@ -46,6 +47,7 @@ const DetailsBannerForms = ({ bannerId }) => {
   const [imageAlt, setImageAlt] = useState("");
   const [imageLink, setImageLink] = useState("");
   const [imageSituation, setImageituation] = useState(true);
+  const [fullData, setFullData] = useState(true);
 
   useEffect(() => {
     axios
@@ -55,14 +57,10 @@ const DetailsBannerForms = ({ bannerId }) => {
         setImageAlt(d.data.imageAlt);
         setImageLink(d.data.link);
         setImageituation(d.data.situation);
+        setFullData(d.data);
       })
       .catch((e) => console.log("error"));
   }, [bannerId]);
-
-  console.log("imageUrl", imageUrl);
-  console.log("imageAlt", imageAlt);
-  console.log("imageLink", imageLink);
-  console.log("imageSituation", imageSituation);
 
   return (
     <div className="flex flex-col gap-8">
@@ -70,10 +68,18 @@ const DetailsBannerForms = ({ bannerId }) => {
         <h2 className="text-orange-500">جزئیات بنر</h2>
         <button
           onClick={() => remover()}
-          className="bg-rose-600 text-white px-4 py-1 rounded-md text-xs"
+          className="bg-rose-600 text-white px-6 py-3 rounded-md text-xs transition-all duration-500 hover:bg-rose-700"
         >
-          حذف بنر
+          حذف
         </button>
+      </div>
+      <div className="flex justify-between items-center">
+        <div className="bg-zinc-200 rounded px-3 py-1 text-sm">
+          شناسه بنر : {fullData._id ? fullData._id : ""}
+        </div>
+        <div className="bg-zinc-200 rounded px-3 py-1 text-sm">
+          تاریخ بروز رسانی بنر : {fullData.date ? fullData.date : ""}
+        </div>
       </div>
       <form
         onKeyDown={formKeysNotSubber}
@@ -83,28 +89,31 @@ const DetailsBannerForms = ({ bannerId }) => {
         <div className="flex flex-col gap-2">
           <div>آدرس جدید عکس</div>
           <input
+            required={true}
             defaultValue={imageUrl}
             ref={imageUrlRef}
             id="text"
-            className="p-2 rounded-md w-full outline-none border-zinc-300 border-2 focus:border-orange-400"
+            className="inputLtr p-2 rounded-md w-full outline-none border-zinc-300 border-2 focus:border-orange-400"
           />
         </div>
         <div className="flex flex-col gap-2">
           <div>آلت جدید عکس</div>
           <input
+            required={true}
             defaultValue={imageAlt}
             ref={imageAltRef}
             id="text"
-            className="p-2 rounded-md w-full outline-none border-zinc-300 border-2 focus:border-orange-400"
+            className="inputLtr p-2 rounded-md w-full outline-none border-zinc-300 border-2 focus:border-orange-400"
           />
         </div>
         <div className="flex flex-col gap-2">
           <div>لینک جدید عکس</div>
           <input
+            required={true}
             defaultValue={imageLink}
             ref={imageLinkRef}
             id="text"
-            className="p-2 rounded-md w-full outline-none border-zinc-300 border-2 focus:border-orange-400"
+            className="inputLtr p-2 rounded-md w-full outline-none border-zinc-300 border-2 focus:border-orange-400"
           />
         </div>
         <div className="flex flex-col gap-2">

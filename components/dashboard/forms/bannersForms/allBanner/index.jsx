@@ -22,25 +22,57 @@ const AllBannerForms = ({ setBannerDetail, setRandNumForBannerClick }) => {
 
   //تعداد صفحات
   const [numberOfPage, setNumberOfPage] = useState([-1]);
-  console.log("numberOfPage", numberOfPage);
+
+  //تعداد کل بنرها
+  const [allBannersNum, setAllBannersNum] = useState(0);
+
+  const [filterBtns, setFilterBtns] = useState([-1]);
+
+  const paginate = 10;
 
   useEffect(() => {
     axios
-      .get(`https://7gardoon-server.liara.run/api/banners?pn=${pageNumber}`)
+      .get(
+        `https://7gardoon-server.liara.run/api/banners?pn=${pageNumber}&&pgn=${paginate}`
+      )
       .then((res) => {
         setBanners(res.data.banners);
         setNumberOfPage(
-          Array.from(Array(Math.ceil(res.data.allBannersNum / 10)).keys())
+          Array.from(Array(Math.ceil(res.data.allBannersNum / paginate)).keys())
         );
+        setAllBannersNum(res.data.allBannersNum);
       })
       .catch((err) => console.log(err));
   }, [pageNumber]);
 
+  useEffect(() => {
+    if (numberOfPage[0] !== -1 && numberOfPage.length > 0) {
+      const arr = [];
+      numberOfPage.map((n) => {
+        if (
+          n == 0 ||
+          (n < pageNumber + 1 && n > pageNumber - 3) ||
+          n == numberOfPage.length - 1
+        ) {
+          arr.push(n);
+        }
+      });
+      setFilterBtns(arr);
+    } else if (numberOfPage.length == 0) {
+      setFilterBtns([]);
+    }
+  }, [numberOfPage]);
+
   return (
-    <div className="p-4 flex flex-col gap-8">
+    <div className="flex flex-col gap-8">
+      <div className="flex justify-end">
+        <div className="w-32 h-10 rounded bg-indigo-500 flex justify-center items-center text-white">
+          {allBannersNum} بنر
+        </div>
+      </div>
       <div className="flex flex-col gap-6 ">
         {/* //در اینجا baanners.length بود */}
-        {numberOfPage[0] == -1 ? (
+        {banners[0] == -1 ? (
           <div className="flex justify-center items-center p-12">
             <Image
               alt="loading"
@@ -48,6 +80,12 @@ const AllBannerForms = ({ setBannerDetail, setRandNumForBannerClick }) => {
               height={120}
               src={"/loading.svg"}
             />
+          </div>
+        ) : banners.length < 1 ? (
+          <div className="flex justify-center items-center">
+            <div className="flex justify-center items-center w-[32rem] p-8 bg-rose-600 text-white">
+              بنری موجود نیست
+            </div>
           </div>
         ) : (
           banners.map((ba, i) => (
@@ -61,12 +99,12 @@ const AllBannerForms = ({ setBannerDetail, setRandNumForBannerClick }) => {
         )}
       </div>
       <div className="flex justify-center items-center gap-4">
-        {numberOfPage[0] == -1 ? (
+        {filterBtns[0] == -1 ? (
           <div className="flex justify-center items-center p-12">
             <Image alt="loading" width={40} height={40} src={"/loading.svg"} />
           </div>
         ) : (
-          numberOfPage.map((data, i) => (
+          filterBtns.map((data, i) => (
             <button
               className="bg-indigo-500 text-white w-8 h-8 flex justify-center items-center rounded transition-all duration-500 hover:bg-orange-500"
               onClick={() => {

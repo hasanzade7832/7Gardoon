@@ -15,7 +15,12 @@ const NewBannerForms = () => {
       imageAlt: imageAltRef.current.value,
       situation: imageSituationRef.current.value,
       link: imageLinkRef.current.value,
+      date: new Date().toLocaleDateString("fa-IR", {
+        hour: "2-digit",
+        minute: "2-digit",
+      }),
     };
+
     const url = `https://7gardoon-server.liara.run/api/newBanners`;
 
     axios
@@ -31,14 +36,16 @@ const NewBannerForms = () => {
         <div className="flex flex-col gap-2">
           <div>آدرس عکس</div>
           <input
+            required={true}
             ref={imageUrlRef}
             id="text"
-            className="p-2 rounded-md w-full outline-none border-zinc-300 border-2 focus:border-orange-400"
+            className="inputLtr p-2 rounded-md w-full outline-none border-zinc-300 border-2 focus:border-orange-400"
           />
         </div>
         <div className="flex flex-col gap-2">
           <div>آلت عکس</div>
           <input
+            required={true}
             ref={imageAltRef}
             id="text"
             className="p-2 rounded-md w-full outline-none border-zinc-300 border-2 focus:border-orange-400"
@@ -47,9 +54,10 @@ const NewBannerForms = () => {
         <div className="flex flex-col gap-2">
           <div>لینک عکس</div>
           <input
+            required={true}
             ref={imageLinkRef}
             id="text"
-            className="p-2 rounded-md w-full outline-none border-zinc-300 border-2 focus:border-orange-400"
+            className="inputLtr p-2 rounded-md w-full outline-none border-zinc-300 border-2 focus:border-orange-400"
           />
         </div>
         <div className="flex flex-col gap-2">

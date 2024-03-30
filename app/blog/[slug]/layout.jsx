@@ -24,6 +24,46 @@ const BlogLayout = ({ children }) => {
           </p>
         </div>
         <div className="flex flex-col gap-4 rounded-lg p-3 shadow-[0px_0px_8px_rgba(0,0,0,0.35)]">
+          <h3 className="text-blue-400">بر چسب ها</h3>
+          <div className="flex justify-start items-center gap-2 flex-wrap">
+            <Link
+              className="rounded-md hover:text-white p-2 justify-center items-center text-base sm:text-sm bg-zinc-100 transition-all duration-300 hover:bg-orange-500  
+                "
+              href={"/"}
+            >
+              مقاله تستی اول
+            </Link>
+            <Link
+              className="rounded-md hover:text-white p-2 justify-center items-center text-base sm:text-sm bg-zinc-100 transition-all duration-300 hover:bg-orange-500  
+                "
+              href={"/"}
+            >
+              مقاله تستی اول
+            </Link>
+            <Link
+              className="rounded-md hover:text-white p-2 justify-center items-center text-base sm:text-sm bg-zinc-100 transition-all duration-300 hover:bg-orange-500  
+                "
+              href={"/"}
+            >
+              مقاله تستی اول
+            </Link>
+            <Link
+              className="rounded-md hover:text-white p-2 justify-center items-center text-base sm:text-sm bg-zinc-100 transition-all duration-300 hover:bg-orange-500  
+                "
+              href={"/"}
+            >
+              مقاله تستی اول
+            </Link>
+            <Link
+              className="p-2 justify-center items-center text-base sm:text-sm bg-zinc-100 transition-all duration-300 hover:bg-orange-500  
+                "
+              href={"/"}
+            >
+              مقاله تستی اول
+            </Link>
+          </div>
+        </div>
+        <div className="flex flex-col gap-4 rounded-lg p-3 shadow-[0px_0px_8px_rgba(0,0,0,0.35)]">
           <h3 className="text-blue-400"> پرازدید ترین مقالات </h3>
           <ul className="flex flex-col gap-6">
             <li>
