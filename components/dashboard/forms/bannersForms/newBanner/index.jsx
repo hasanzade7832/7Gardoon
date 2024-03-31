@@ -29,10 +29,19 @@ const NewBannerForms = () => {
       .catch((e) => console.log("error"));
   };
 
+  const formKeysNotSubber = (event) => {
+    if (event.key == "Enter") {
+      event.preventDefault();
+    }
+  };
   return (
     <div className="flex flex-col gap-8">
       <h2 className="text-orange-500">بنر جدید</h2>
-      <form onSubmit={submitter} className="flex flex-col gap-6">
+      <form
+        onSubmit={submitter}
+        className="flex flex-col gap-6"
+        onKeyDown={formKeysNotSubber}
+      >
         <div className="flex flex-col gap-2">
           <div>آدرس عکس</div>
           <input

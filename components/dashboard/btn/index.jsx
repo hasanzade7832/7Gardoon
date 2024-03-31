@@ -7,11 +7,19 @@ const DCBtn = ({
   colorChanger,
   setColorChanger,
 }) => {
+  const goTopCtrl = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
   return (
     <button
       onClick={() => {
         setContentChanger(content);
         setColorChanger(content);
+        goTopCtrl();
       }}
       className={
         colorChanger == content
