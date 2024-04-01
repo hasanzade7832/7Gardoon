@@ -93,7 +93,6 @@ const NewPostsForms = () => {
 
   const formKeysNotSubber = (event) => {
     if (event.key == "Enter") {
-      alert("enter");
       event.preventDefault();
     }
   };
