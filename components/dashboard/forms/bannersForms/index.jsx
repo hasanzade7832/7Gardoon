@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import AllBannerForms from "./allBanner";
 import NewBannerForms from "./newBanner";
-import DetailsBannerForms from "../detailsBanner";
+import DetailsBannerForms from "../detailsBanner/index";
 
 const BannerForms = () => {
   const [bannerDetail, setBannerDetail] = useState("");

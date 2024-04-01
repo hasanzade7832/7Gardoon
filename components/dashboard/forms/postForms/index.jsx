@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import AllPostForms from "../postForms/allPost/index";
 import NewPostForms from "./newPost/index";
 // import NewPostForms from "./newBanner";
-import DetailsBannerForms from "../detailsBanner";
+import DetailsPostForms from "../postForms/detailsPosts/index";
 
 const PostForms = () => {
   const [bannerDetail, setBannerDetail] = useState("");
@@ -19,7 +19,7 @@ const PostForms = () => {
 
   useEffect(() => {
     if (bannerDetail != "") {
-      setAllOrNew(<DetailsBannerForms bannerId={bannerDetail} />);
+      setAllOrNew(<DetailsPostForms bannerId={bannerDetail} />);
     }
   }, [bannerDetail, randNumForBannerClick]);
 
