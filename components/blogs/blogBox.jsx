@@ -6,7 +6,7 @@ const BlogBox = ({ data }) => {
     <article className="sliderItem p-2 hover:pt-0 transition-all duration-300">
       <div className="relative bg-white shadow-[0px_1px_8px_rgba(0,0,0,0.2)] h-[25rem] w-72 rounded-lg">
         <div className="flex justify-center items-center pt-4">
-          <Link href={`/post/${data.slug}`} target={"_blank"}>
+          <Link href={`/blog/${data.slug}`} target={"_blank"}>
             <Image
               width={260}
               height={150}

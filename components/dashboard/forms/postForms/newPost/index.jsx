@@ -207,7 +207,8 @@ const NewPostsForms = () => {
             </div>
           </div>
         </div>
-        <div>
+        <div className="flex flex-col gap-2">
+          <h>مقالات مرتبط</h>
           {posts[0] == -1 ? (
             <Image alt="loading" width={40} height={40} src={"/loading.svg"} />
           ) : posts.length < 1 ? (
