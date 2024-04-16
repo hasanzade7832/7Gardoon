@@ -5,7 +5,7 @@ import axios from "axios";
 import Link from "next/link";
 import Image from "next/image";
 
-const singleBlogs = () => {
+const MostViewedPosts = () => {
   const [posts, setposts] = useState([-1]);
 
   useEffect(() => {
@@ -33,7 +33,7 @@ const singleBlogs = () => {
           posts.map((po, i) => (
             <li>
               <Link
-                className="p-2 justify-center items-center text-base sm:text-sm border-r-2 border-zinc-600"
+                className="p-2 justify-start items-center text-base sm:text-sm border-r-2 border-zinc-600"
                 href={`/blog/${po.slug}`}
               >
                 {po.title}
@@ -46,4 +46,4 @@ const singleBlogs = () => {
   );
 };
 
-export default singleBlogs;
+export default MostViewedPosts;

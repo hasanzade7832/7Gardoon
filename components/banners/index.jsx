@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const getData = async () => {
   const data = await fetch(
-    "https://7gardoon-server.liara.run/api/activeBanners"
+    "https://7gardoon-server.liara.run/api/activeBanners",{cache:"no-store"}
   );
   return data.json();
 };

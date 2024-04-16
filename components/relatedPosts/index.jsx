@@ -3,10 +3,13 @@
 import BlogBox from "../blogs/blogBox";
 import { FaChevronRight } from "react-icons/fa";
 import { FaChevronLeft } from "react-icons/fa";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import Link from "next/link";
+import axios from "axios";
+import Image from "next/image";
 
-const RelatedPosts = ({ title }) => {
+
+const RelatedPosts = ({ title, relatedPostsData }) => {
   const carouselRef = useRef();
   const carouselSwitcher = (data) => {
     if (carouselRef.current) {
@@ -17,6 +20,18 @@ const RelatedPosts = ({ title }) => {
       );
     }
   };
+  const sendingDataForRel = { goalIds: relatedPostsData }
+  const [relPostsData, setRelPostsData] = useState([-1]);
+
+  useEffect(() => {
+    const url = "https://7gardoon-server.liara.run/api/relatedPosts";
+    axios.post(url, sendingDataForRel)
+      .then(d => {
+        console.log("ddd", d.data)
+        setRelPostsData(d.data)
+      })
+      .catch(e => console.log("eeeeee", e))
+  }, [relatedPostsData])
 
   return (
     <div className="container mx-auto ">
@@ -24,7 +39,7 @@ const RelatedPosts = ({ title }) => {
         <div className="flex flex-col gap-4 px-2">
           <header className=" flex justify-between items-center">
             <h2 className=" text-2xl border-r-white-400 border-r-2 pr-1 text-black">
-             {title}
+              {title}
             </h2>
             <div className="flex gap-1 items-center">
               <div className=" flex items-center gap-1 ">
@@ -48,14 +63,17 @@ const RelatedPosts = ({ title }) => {
             className="sliderContainer w-full max-w-7xl overflow-x-scroll px-5  "
           >
             <div className=" flex justify-start items-center gap-1 w-full">
-              <BlogBox />
-              <BlogBox />
-              <BlogBox />
-              <BlogBox />
-              <BlogBox />
-              <BlogBox />
-              <BlogBox />
-              <BlogBox />
+              {
+                relPostsData[0] == -1 ? <div>
+                  <Image alt="loading" width={40} height={40} src={"/loading.svg"} />
+                </div> : (relPostsData.posts.length < 1) ? <div className="justify-center flex items-center p-4"> مقاله مرتبطی موجود نیست</div> :
+
+                  relPostsData.posts.map((po, i) => (
+
+                    <BlogBox key={i} data={po} />
+                  ))
+
+              }
             </div>
           </div>
         </div>

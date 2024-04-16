@@ -7,11 +7,11 @@ import { BsCalendar2Week } from "react-icons/bs";
 import { CiSearch } from "react-icons/ci";
 import { IoSendOutline } from "react-icons/io5";
 import Link from "next/link";
-import SingleBlogs from "@/components/singleBlog";
+import MostViewdPage from "@/components/mostViewedPost";
 
 const getData = async (slug) => {
   const data = await fetch(
-    `https://7gardoon-server.liara.run/api/post/${slug}`
+    `https://7gardoon-server.liara.run/api/post/${slug}`,{cache:"no-store"}
   );
   return data.json();
 };
@@ -63,8 +63,8 @@ const SingleBlug = async ({ params }) => {
             <p className="leading-9">{data.longDesc}</p>
           </section>
           <section className="flex flex-col gap-4">
-            {/* <h2 className="text-xl">مطالب مرتبط</h2> */}
-            {/* <RelatedPosts title={"مقالات مرتبط"} /> */}
+            <h2 className="text-xl">مطالب مرتبط</h2>
+            <RelatedPosts title={"مقالات مرتبط"} relatedPostsData={data.relatedPosts}/>
           </section>
           <section className="flex flex-col gap-6">
             <h2 className="text-xl">دیدگاهها</h2>
@@ -105,7 +105,7 @@ const SingleBlug = async ({ params }) => {
           </div>
         </div>
 
-        <SingleBlogs />
+        <MostViewdPage />
 
         <div className="flex flex-col gap-4 rounded-lg p-3 shadow-[0px_0px_8px_rgba(0,0,0,0.35)]">
           <h3 className="text-blue-400">پر فروش ترین محصولات</h3>
