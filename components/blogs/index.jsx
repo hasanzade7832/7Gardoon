@@ -6,8 +6,8 @@ const getData = async () => {
 };
 
 const Blogs = async () => {
-  const data = await getData();
-  console.log("bbb", data);
+  const dataBlog = await getData();
+  console.log("bbb", dataBlog);
   return (
     <section className="flex flex-col gap-4 container mx-auto">
       <header className="flex items-center mt-20">
@@ -16,7 +16,7 @@ const Blogs = async () => {
         </h2>
       </header>
       <div className="flex items-center flex-wrap gap-1">
-        {data.map((bl, i) => (
+        {dataBlog.map((bl, i) => (
           <BlogBox key={i} data={bl} />
         ))}
       </div>
