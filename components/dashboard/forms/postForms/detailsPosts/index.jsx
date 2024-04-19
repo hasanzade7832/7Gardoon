@@ -138,7 +138,7 @@ const DetailsBannerForms = ({ bannerId }) => {
       longDesc: longDescRef.current.value,
       tags: tag,
       published: publishedRef.current.value,
-      relatedPosts: checkedPosts, // استفاده از مقدار جدید checkedPosts برای relatedPosts
+      relatedPosts: checkedPosts,
     };
 
     const url = `https://7gardoon-server.liara.run/api/updatePost/${bannerId}`;

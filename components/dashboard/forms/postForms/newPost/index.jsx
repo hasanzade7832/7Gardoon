@@ -109,6 +109,14 @@ const NewPostsForms = () => {
             draggable: true,
             progress: undefined,
           });
+          titleRef.current.value = "";
+          slugRef.current.value = "";
+          imageRef.current.value = "";
+          imageAltRef.current.value = "";
+          shortDescRef.current.value = "";
+          longDescRef.current.value = "";
+          publishedRef.current.value = true;
+          setTag([]);
         }
       })
       .catch((e) => {
