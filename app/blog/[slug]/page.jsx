@@ -35,6 +35,7 @@ const SingleBlug = async ({ params }) => {
               width={700}
               height={300}
               alt={data.imageAlt}
+              title={data.imageAlt}
               src={data.image}
               priority={true}
             />

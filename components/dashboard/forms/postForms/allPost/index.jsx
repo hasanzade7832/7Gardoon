@@ -110,7 +110,7 @@ const AllPostsForms = ({ setBannerDetail, setRandNumForBannerClick }) => {
               className="bg-indigo-500 text-white w-8 h-8 flex justify-center items-center rounded transition-all duration-500 hover:bg-orange-500"
               onClick={() => {
                 setPageNumber(data + 1);
-                setPosts([]);
+                setPosts([-1]);
                 goTopCtrl();
               }}
               key={i}

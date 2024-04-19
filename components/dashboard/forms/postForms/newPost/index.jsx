@@ -2,6 +2,9 @@
 import { useRef, useState, useEffect } from "react";
 import axios from "axios";
 import Image from "next/image";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
 const NewPostsForms = () => {
   const titleRef = useRef();
@@ -72,8 +75,41 @@ const NewPostsForms = () => {
 
     axios
       .post(url, formData)
-      .then((d) => console.log("ok"))
-      .catch((e) => console.log("error"));
+      .then((d) => {
+        if (formData.published == "true") {
+          toast.success("پست با موفقیت منتشر شد", {
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+        } else {
+          toast.success("پست بصورت پیش نویس ذخیره", {
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+        }
+      })
+      .catch((e) => {
+        let message = "متاسفانه ناموفق بود.";
+        if (e.response.data.msg) {
+          message = e.response.data.msg;
+        }
+        toast.error(message, {
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      });
   };
 
   const tagSuber = (e) => {
@@ -246,6 +282,19 @@ const NewPostsForms = () => {
           ارسال
         </button>
       </form>
+      <ToastContainer
+        bodyClassName={() => "font-[IranSans] text-sm flex items-center"}
+        position="top-right"
+        autoClose={3000}
+        theme="colored"
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={true}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </div>
   );
 };

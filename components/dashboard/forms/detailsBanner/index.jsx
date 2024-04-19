@@ -1,6 +1,9 @@
 "use client";
 import { useRef, useEffect, useState } from "react";
 import axios from "axios";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
 const DetailsBannerForms = ({ bannerId }) => {
   const formKeysNotSubber = (event) => {
@@ -30,8 +33,41 @@ const DetailsBannerForms = ({ bannerId }) => {
 
     axios
       .post(url, formData)
-      .then((d) => console.log("ok"))
-      .catch((e) => console.log("error"));
+      .then((d) => {
+        if (formData.situation == "true") {
+          toast.success("مقاله با موفقیت بروز رسانی شد", {
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+        } else {
+          toast.success("مقاله بصورت پیش نویس ذخیره", {
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+        }
+      })
+      .catch((e) => {
+        let message = "متاسفانه ناموفق بود.";
+        if (e.response.data.msg) {
+          message = e.response.data.msg;
+        }
+        toast.error(message, {
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      });
   };
 
   const remover = () => {
@@ -143,6 +179,19 @@ const DetailsBannerForms = ({ bannerId }) => {
           به روز رسانی
         </button>
       </form>
+      <ToastContainer
+        bodyClassName={() => "font-[IranSans] text-sm flex items-center"}
+        position="top-right"
+        autoClose={3000}
+        theme="colored"
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={true}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </div>
   );
 };

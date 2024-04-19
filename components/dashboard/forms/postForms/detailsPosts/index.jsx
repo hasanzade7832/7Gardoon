@@ -2,8 +2,14 @@
 import { useRef, useEffect, useState } from "react";
 import Image from "next/image";
 import axios from "axios";
+import Link from "next/link";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
 const DetailsBannerForms = ({ bannerId }) => {
+  const [checkedPosts, setCheckedPosts] = useState([]);
+
   const formKeysNotSubber = (event) => {
     if (event.key == "Enter") {
       event.preventDefault();
@@ -44,7 +50,7 @@ const DetailsBannerForms = ({ bannerId }) => {
       .get(postsUrl)
       .then((d) => {
         setPosts(d.data);
-        console.log(d.data);
+        console.log("fffffffff", d.data);
       })
       .catch((e) => console.log("error"));
   }, []);
@@ -52,17 +58,70 @@ const DetailsBannerForms = ({ bannerId }) => {
   console.log("posts", posts);
 
   const [relPosts, setRelPosts] = useState([]);
-  const postRelated = (v) => {
-    let related = [...relPosts];
-    if (v.target.checked) {
-      related = [...related, v.target.value];
+  // const postRelated = (v) => {
+  //   let related = [...relPosts];
+  //   if (v.target.checked) {
+  //     related = [...related, v.target.value];
+  //   } else {
+  //     related.splice(relPosts.indexOf(v.target.value), 1);
+  //   }
+  //   setRelPosts(related);
+  // };
+
+  const postRelated = (e) => {
+    const postId = e.target.value;
+    const isChecked = e.target.checked;
+
+    if (isChecked) {
+      const updatedRelatedPosts = [...fullData.relatedPosts, postId];
+      setFullData((prevData) => ({
+        ...prevData,
+        relatedPosts: updatedRelatedPosts,
+      }));
+      setCheckedPosts((prevChecked) => [...prevChecked, postId]);
     } else {
-      related.splice(relPosts.indexOf(v.target.value), 1);
+      const updatedRelatedPosts = fullData.relatedPosts.filter(
+        (id) => id !== postId
+      );
+      setFullData((prevData) => ({
+        ...prevData,
+        relatedPosts: updatedRelatedPosts,
+      }));
+      setCheckedPosts((prevChecked) =>
+        prevChecked.filter((id) => id !== postId)
+      );
     }
-    setRelPosts(related);
   };
 
   console.log("relPosts", relPosts);
+
+  // const updater = (e) => {
+  //   e.preventDefault();
+  //   const formData = {
+  //     title: titleRef.current.value,
+  //     updatedAt: new Date().toLocaleDateString("fa-IR", {
+  //       hour: "2-digit",
+  //       minute: "2-digit",
+  //     }),
+  //     slug: slugRef.current.value,
+  //     image: imageRef.current.value,
+  //     imageAlt: imageAltRef.current.value,
+  //     shortDesc: shortDescRef.current.value,
+  //     longDesc: longDescRef.current.value,
+  //     tags: tag,
+  //     published: publishedRef.current.value,
+  //     relatedPosts: relPosts,
+  //   };
+
+  //   const url = `https://7gardoon-server.liara.run/api/updatePost/${bannerId}`;
+
+  //   console.log("formData", formData);
+
+  //   axios
+  //     .post(url, formData)
+  //     .then((d) => console.log("ok"))
+  //     .catch((e) => console.log("error"));
+  // };
 
   const updater = (e) => {
     e.preventDefault();
@@ -79,17 +138,48 @@ const DetailsBannerForms = ({ bannerId }) => {
       longDesc: longDescRef.current.value,
       tags: tag,
       published: publishedRef.current.value,
-      relatedPosts: relPosts,
+      relatedPosts: checkedPosts, // استفاده از مقدار جدید checkedPosts برای relatedPosts
     };
 
     const url = `https://7gardoon-server.liara.run/api/updatePost/${bannerId}`;
 
-    console.log("formData", formData);
-
     axios
       .post(url, formData)
-      .then((d) => console.log("ok"))
-      .catch((e) => console.log("error"));
+      .then((d) => {
+        if (formData.published == "true") {
+          toast.success("پست با موفقیت بروز رسانی شد", {
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+        } else {
+          toast.success("پست بصورت پیش نویس ذخیره", {
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+        }
+      })
+      .catch((e) => {
+        let message = "متاسفانه ناموفق بود.";
+        if (e.response.data.msg) {
+          message = e.response.data.msg;
+        }
+        toast.error(message, {
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      });
   };
 
   const remover = () => {
@@ -97,8 +187,26 @@ const DetailsBannerForms = ({ bannerId }) => {
 
     axios
       .post(url)
-      .then((d) => console.log("removed", d))
-      .catch((e) => console.log("error"));
+      .then((d) => {
+        toast.success("پست با موفقیت حذف شد", {
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      })
+      .catch((e) => {
+        toast.error("هنگام حذف پست خطایی رخ داد", {
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      });
   };
 
   const [fullData, setFullData] = useState(true);
@@ -109,20 +217,38 @@ const DetailsBannerForms = ({ bannerId }) => {
       .then((d) => {
         setFullData(d.data);
         setTag(d.data.tags);
+        setRelPosts(d.data.relatedPosts);
+        console.log("aaaaaaaa", d.data);
       })
       .catch((e) => console.log("error"));
   }, [bannerId]);
+
+  console.log("rrrrrrrrr", fullData.relatedPosts);
+
+  useEffect(() => {
+    if (fullData && fullData.relatedPosts) {
+      setCheckedPosts(fullData.relatedPosts);
+    }
+  }, [fullData]);
 
   return (
     <div className="flex flex-col gap-8">
       <div className="flex justify-between items-center">
         <h2 className="text-orange-500">جزئیات پست</h2>
-        <button
-          onClick={() => remover()}
-          className="bg-rose-600 text-white px-6 py-3 rounded-md text-xs transition-all duration-500 hover:bg-rose-700"
-        >
-          حذف
-        </button>
+        <div className="flex justify-end items-center gap-4">
+          <Link
+            href={`/blog/${fullData.slug}`}
+            className="bg-blue-600 text-white px-6 py-3 rounded-md text-xs transition-all duration-500 hover:bg-blue-700"
+          >
+            لینک پست
+          </Link>
+          <button
+            onClick={() => remover()}
+            className="bg-rose-600 text-white px-6 py-3 rounded-md text-xs transition-all duration-500 hover:bg-rose-700"
+          >
+            حذف
+          </button>
+        </div>
       </div>
       <div className="flex justify-between items-center">
         <div className="bg-zinc-200 rounded px-3 py-1 text-sm">
@@ -253,6 +379,9 @@ const DetailsBannerForms = ({ bannerId }) => {
           </div>
         </div>
         <div>
+          <h1 className="bg-zinc-400 w-[7%] rounded px-3 py-1 text-sm mb-5 text-white">
+            مقاله مرتبط
+          </h1>
           {posts[0] == -1 ? (
             <Image alt="loading" width={40} height={40} src={"/loading.svg"} />
           ) : posts.length < 1 ? (
@@ -261,24 +390,16 @@ const DetailsBannerForms = ({ bannerId }) => {
             <div className="flex justify-start items-center flex-wrap gap-2">
               {posts.map((po, i) => (
                 <div key={i} className="bg-zinc-100 px-2 py-1 rounded">
-                  {po.title}
-                  {fullData.relatedPosts &&
-                  fullData.relatedPosts.includes(po._id) ? (
-                    <input
-                      value={po._id}
-                      onChange={postRelated}
-                      type="checkbox"
-                      className="m-2"
-                      defaultChecked
-                    />
-                  ) : (
-                    <input
-                      value={po._id}
-                      onChange={postRelated}
-                      type="checkbox"
-                      className="m-2"
-                    />
-                  )}
+                  <label htmlFor={po._id}>{po.title}</label>
+                  <input
+                    name={po._id}
+                    id={po._id}
+                    value={po._id}
+                    onChange={postRelated}
+                    type="checkbox"
+                    className="m-2"
+                    checked={checkedPosts.includes(po._id)}
+                  />
                 </div>
               ))}
             </div>
@@ -315,6 +436,19 @@ const DetailsBannerForms = ({ bannerId }) => {
           به روز رسانی
         </button>
       </form>
+      <ToastContainer
+        bodyClassName={() => "font-[IranSans] text-sm flex items-center"}
+        position="top-right"
+        autoClose={3000}
+        theme="colored"
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={true}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </div>
   );
 };
