@@ -35,7 +35,7 @@ const DetailsBannerForms = ({ bannerId }) => {
       .post(url, formData)
       .then((d) => {
         if (formData.situation == "true") {
-          toast.success("مقاله با موفقیت بروز رسانی شد", {
+          toast.success("بنر با موفقیت بروز رسانی شد", {
             autoClose: 3000,
             hideProgressBar: false,
             closeOnClick: true,
@@ -44,7 +44,7 @@ const DetailsBannerForms = ({ bannerId }) => {
             progress: undefined,
           });
         } else {
-          toast.success("مقاله بصورت پیش نویس ذخیره", {
+          toast.success("بنر بصورت پیش نویس ذخیره شد", {
             autoClose: 3000,
             hideProgressBar: false,
             closeOnClick: true,
@@ -72,11 +72,28 @@ const DetailsBannerForms = ({ bannerId }) => {
 
   const remover = () => {
     const url = `https://7gardoon-server.liara.run/api/deleteBanners/${bannerId}`;
-
     axios
       .post(url)
-      .then((d) => console.log("removed"))
-      .catch((e) => console.log("error"));
+      .then((d) => {
+        toast.success("بنر با موفقیت حذف شد", {
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      })
+      .catch((e) => {
+        toast.error("هنگام حذف بنر خطایی رخ داد", {
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      });
   };
 
   const [imageUrl, setImageUrl] = useState("");
@@ -89,10 +106,10 @@ const DetailsBannerForms = ({ bannerId }) => {
     axios
       .get(`https://7gardoon-server.liara.run/api/banners/${bannerId}`)
       .then((d) => {
-        setImageUrl(d.data.image);
-        setImageAlt(d.data.imageAlt);
-        setImageLink(d.data.link);
-        setImageituation(d.data.situation);
+        setImageUrl(d.data.image || "");
+        setImageAlt(d.data.imageAlt || "");
+        setImageLink(d.data.link || "");
+        setImageituation(d.data.situation || "");
         setFullData(d.data);
       })
       .catch((e) => console.log("error"));

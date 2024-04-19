@@ -73,6 +73,12 @@ const NewPostsForms = () => {
 
     console.log("formData", formData);
 
+    setRelPosts([]);
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach((checkbox) => {
+      checkbox.checked = false;
+    });
+
     axios
       .post(url, formData)
       .then((d) => {
@@ -85,6 +91,15 @@ const NewPostsForms = () => {
             draggable: true,
             progress: undefined,
           });
+          titleRef.current.value = "";
+          slugRef.current.value = "";
+          imageRef.current.value = "";
+          imageAltRef.current.value = "";
+          shortDescRef.current.value = "";
+          longDescRef.current.value = "";
+          publishedRef.current.value = true;
+          setTag([]);
+          console.log("HHHHHHH", relPosts);
         } else {
           toast.success("پست بصورت پیش نویس ذخیره", {
             autoClose: 3000,

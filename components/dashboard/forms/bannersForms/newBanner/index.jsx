@@ -13,6 +13,7 @@ const NewBannerForms = () => {
   const imageSituationRef = useRef();
 
   const submitter = (e) => {
+    console.log("link", imageLinkRef.current.value);
     e.preventDefault();
     const formData = {
       image: imageUrlRef.current.value,
@@ -31,7 +32,7 @@ const NewBannerForms = () => {
       .post(url, formData)
       .then((d) => {
         if (formData.situation == "true") {
-          toast.success("مقاله با موفقیت منتشر شد", {
+          toast.success("بنر با موفقیت منتشر شد", {
             autoClose: 3000,
             hideProgressBar: false,
             closeOnClick: true,
@@ -39,8 +40,12 @@ const NewBannerForms = () => {
             draggable: true,
             progress: undefined,
           });
+          imageLinkRef.current.value = "";
+          imageUrlRef.current.value = "";
+          imageAltRef.current.value = "";
+          imageSituationRef.current.value = true;
         } else {
-          toast.success("مقاله بصورت پیش نویس ذخیره", {
+          toast.success("بنر بصورت پیش نویس ذخیره", {
             autoClose: 3000,
             hideProgressBar: false,
             closeOnClick: true,
@@ -48,6 +53,10 @@ const NewBannerForms = () => {
             draggable: true,
             progress: undefined,
           });
+          imageLinkRef.current.value = "";
+          imageUrlRef.current.value = "";
+          imageAltRef.current.value = "";
+          imageSituationRef.current.value = true;
         }
       })
       .catch((e) => {
