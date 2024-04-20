@@ -8,7 +8,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 
-const AllPostsForms = ({ setBannerDetail, setRandNumForBannerClick }) => {
+const AllSlidersForms = ({ setBannerDetail, setRandNumForBannerClick }) => {
   console.log("setBannerDetail", setBannerDetail);
   const goTopCtrl = () => {
     window.scrollTo({
@@ -18,7 +18,7 @@ const AllPostsForms = ({ setBannerDetail, setRandNumForBannerClick }) => {
   };
 
   //اطلاعات کلی بنرها
-  const [posts, setPosts] = useState([-1]);
+  const [sliders, setSliders] = useState([-1]);
 
   //صفحه چندمیم
   const [pageNumber, setPageNumber] = useState(1);
@@ -27,24 +27,23 @@ const AllPostsForms = ({ setBannerDetail, setRandNumForBannerClick }) => {
   const [numberOfPage, setNumberOfPage] = useState([-1]);
 
   //تعداد کل بنرها
-  const [allPostsNum, setAllBannersNum] = useState(0);
+  const [allSlidersNum, setAllBannersNum] = useState(0);
 
   const [filterBtns, setFilterBtns] = useState([-1]);
 
-  const paginate = 10;
+  const paginate =10;
 
   useEffect(() => {
     axios
       .get(
-        `https://7gardoon-server1.liara.run/api/post?pn=${pageNumber}&&pgn=${paginate}`
+        `https://7gardoon-server1.liara.run/api/sliders?pn=${pageNumber}&&pgn=${paginate}`
       )
       .then((res) => {
-        console.log("res", res.data);
-        setPosts(res.data.posts);
+        setSliders(res.data.sliders);
         setNumberOfPage(
-          Array.from(Array(Math.ceil(res.data.allPostsNum / paginate)).keys())
+          Array.from(Array(Math.ceil(res.data.allSliderNum / paginate)).keys())
         );
-        setAllBannersNum(res.data.allPostsNum);
+        setAllBannersNum(res.data.allSliderNum);
       })
       .catch((err) => {
         toast.error("خطا در لود اطلاعات", {
@@ -80,12 +79,12 @@ const AllPostsForms = ({ setBannerDetail, setRandNumForBannerClick }) => {
     <div className="flex flex-col gap-8">
       <div className="flex justify-end">
         <div className="w-32 h-10 rounded bg-indigo-500 flex justify-center items-center text-white">
-          {allPostsNum} پست
+          {allSlidersNum} اسلایدر
         </div>
       </div>
       <div className="flex flex-col gap-6 ">
         {/* //در اینجا baanners.length بود */}
-        {posts[0] == -1 ? (
+        {sliders[0] == -1 ? (
           <div className="flex justify-center items-center p-12">
             <Image
               alt="loading"
@@ -94,17 +93,17 @@ const AllPostsForms = ({ setBannerDetail, setRandNumForBannerClick }) => {
               src={"/loading.svg"}
             />
           </div>
-        ) : posts.length < 1 ? (
+        ) : sliders.length < 1 ? (
           <div className="flex justify-center items-center">
             <div className="flex justify-center items-center w-[32rem] p-8 bg-rose-600 text-white">
-              پستی موجود نیست
+              اسلایدری موجود نیست
             </div>
           </div>
         ) : (
-          posts.map((da, i) => (
+          sliders.map((ba, i) => (
             <Box
               key={i}
-              data={da}
+              data={ba}
               setBannerDetail={setBannerDetail}
               setRandNumForBannerClick={setRandNumForBannerClick}
             />
@@ -122,7 +121,7 @@ const AllPostsForms = ({ setBannerDetail, setRandNumForBannerClick }) => {
               className="bg-indigo-500 text-white w-8 h-8 flex justify-center items-center rounded transition-all duration-500 hover:bg-orange-500"
               onClick={() => {
                 setPageNumber(data + 1);
-                setPosts([-1]);
+                setSliders([-1]);
                 goTopCtrl();
               }}
               key={i}
@@ -149,4 +148,4 @@ const AllPostsForms = ({ setBannerDetail, setRandNumForBannerClick }) => {
   );
 };
 
-export default AllPostsForms;
+export default AllSlidersForms;

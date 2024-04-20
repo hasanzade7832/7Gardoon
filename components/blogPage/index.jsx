@@ -32,7 +32,7 @@ const BlogPageComponent = () => {
   useEffect(() => {
     axios
       .get(
-        `https://7gardoon-server.liara.run/api/postPage?pn=${pageNumber}&pgn=${paginate}`
+        `https://7gardoon-server1.liara.run/api/postPage?pn=${pageNumber}&pgn=${paginate}`
       )
       .then((res) => {
         console.log("res", res.data);

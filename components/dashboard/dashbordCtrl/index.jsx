@@ -23,7 +23,7 @@ const DashboardCtrl = ({ setContentChanger }) => {
           setColorChanger={setColorChanger}
         />
         <DCBtn
-          title={"مقالات"}
+          title={"پست ها"}
           content={"posts"}
           setContentChanger={setContentChanger}
           colorChanger={colorChanger}

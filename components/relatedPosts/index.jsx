@@ -24,7 +24,7 @@ const RelatedPosts = ({ title, relatedPostsData }) => {
   const [relPostsData, setRelPostsData] = useState([-1]);
 
   useEffect(() => {
-    const url = "https://7gardoon-server.liara.run/api/relatedPosts";
+    const url = "https://7gardoon-server1.liara.run/api/relatedPosts";
     axios.post(url, sendingDataForRel)
       .then(d => {
         console.log("ddd", d.data)

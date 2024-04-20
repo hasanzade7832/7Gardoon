@@ -6,9 +6,10 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 
-const NewBannerForms = () => {
+const NewSliderForms = () => {
   const imageUrlRef = useRef();
   const imageAltRef = useRef();
+  const sorterRef = useRef();
   const imageLinkRef = useRef();
   const imageSituationRef = useRef();
 
@@ -18,6 +19,7 @@ const NewBannerForms = () => {
     const formData = {
       image: imageUrlRef.current.value,
       imageAlt: imageAltRef.current.value,
+      sorter: sorterRef.current.value,
       situation: imageSituationRef.current.value,
       link: imageLinkRef.current.value,
       date: new Date().toLocaleDateString("fa-IR", {
@@ -26,13 +28,14 @@ const NewBannerForms = () => {
       }),
     };
 
-    const url = `https://7gardoon-server1.liara.run/api/newBanners`;
+    const url = `https://7gardoon-server1.liara.run/api/newSliders`;
 
     axios
       .post(url, formData)
       .then((d) => {
+  
         if (formData.situation == "true") {
-          toast.success("بنر با موفقیت منتشر شد", {
+          toast.success("اسلایدر با موفقیت منتشر شد", {
             autoClose: 3000,
             hideProgressBar: false,
             closeOnClick: true,
@@ -42,13 +45,14 @@ const NewBannerForms = () => {
           });
           imageLinkRef.current.value = "";
           imageUrlRef.current.value = "";
+          sorterRef.current.value = null;
           imageAltRef.current.value = "";
           imageSituationRef.current.value = true;
           setTimeout(()=>{
             window.location.href = "/dashboard";
           },500)
         } else {
-          toast.success("بنر بصورت پیش نویس ذخیره", {
+          toast.success("اسلایدر بصورت پیش نویس ذخیره", {
             autoClose: 3000,
             hideProgressBar: false,
             closeOnClick: true,
@@ -60,6 +64,7 @@ const NewBannerForms = () => {
           imageUrlRef.current.value = "";
           imageAltRef.current.value = "";
           imageSituationRef.current.value = true;
+          sorterRef.current.value = null;
           setTimeout(()=>{
             window.location.href = "/dashboard";
           },500)
@@ -88,7 +93,7 @@ const NewBannerForms = () => {
   };
   return (
     <div className="flex flex-col gap-8">
-      <h2 className="text-orange-500">بنر جدید</h2>
+      <h2 className="text-orange-500">اسلایدر جدید</h2>
       <form
         onSubmit={submitter}
         className="flex flex-col gap-6"
@@ -99,7 +104,7 @@ const NewBannerForms = () => {
           <input
             required={true}
             ref={imageUrlRef}
-            id="text"
+            type="text"
             className="inputLtr p-2 rounded-md w-full outline-none border-zinc-300 border-2 focus:border-orange-400"
           />
         </div>
@@ -108,7 +113,16 @@ const NewBannerForms = () => {
           <input
             required={true}
             ref={imageAltRef}
-            id="text"
+            type="text"
+            className="p-2 rounded-md w-full outline-none border-zinc-300 border-2 focus:border-orange-400"
+          />
+        </div>
+        <div className="flex flex-col gap-2">
+          <div>سورتر اسلایدر</div>
+          <input
+            required={true}
+            ref={sorterRef}
+            type="number"
             className="p-2 rounded-md w-full outline-none border-zinc-300 border-2 focus:border-orange-400"
           />
         </div>
@@ -117,7 +131,7 @@ const NewBannerForms = () => {
           <input
             required={true}
             ref={imageLinkRef}
-            id="text"
+            type="text"
             className="inputLtr p-2 rounded-md w-full outline-none border-zinc-300 border-2 focus:border-orange-400"
           />
         </div>
@@ -155,4 +169,4 @@ const NewBannerForms = () => {
   );
 };
 
-export default NewBannerForms;
+export default NewSliderForms;

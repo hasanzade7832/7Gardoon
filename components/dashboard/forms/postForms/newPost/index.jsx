@@ -19,7 +19,7 @@ const NewPostsForms = () => {
 
   const [posts, setPosts] = useState([-1]);
   useEffect(() => {
-    const postsUrl = `https://7gardoon-server.liara.run/api/postRel`;
+    const postsUrl = `https://7gardoon-server1.liara.run/api/postRel`;
     axios
       .get(postsUrl)
       .then((d) => {
@@ -69,7 +69,7 @@ const NewPostsForms = () => {
       relatedPosts: relPosts,
     };
 
-    const url = `https://7gardoon-server.liara.run/api/newPost`;
+    const url = `https://7gardoon-server1.liara.run/api/newPost`;
 
     console.log("formData", formData);
 
@@ -98,6 +98,9 @@ const NewPostsForms = () => {
           shortDescRef.current.value = "";
           longDescRef.current.value = "";
           publishedRef.current.value = true;
+          setTimeout(()=>{
+            window.location.href = "/dashboard";
+          },500)
           setTag([]);
           console.log("HHHHHHH", relPosts);
         } else {
@@ -117,6 +120,9 @@ const NewPostsForms = () => {
           longDescRef.current.value = "";
           publishedRef.current.value = true;
           setTag([]);
+          setTimeout(()=>{
+            window.location.href = "/dashboard";
+          },500)
         }
       })
       .catch((e) => {
@@ -267,7 +273,7 @@ const NewPostsForms = () => {
           </div>
         </div>
         <div className="flex flex-col gap-2">
-          <h>مقالات مرتبط</h>
+          <h>پست ها مرتبط</h>
           {posts[0] == -1 ? (
             <Image alt="loading" width={40} height={40} src={"/loading.svg"} />
           ) : posts.length < 1 ? (

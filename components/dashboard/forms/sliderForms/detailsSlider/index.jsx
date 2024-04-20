@@ -5,8 +5,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 
-const DetailsBannerForms = ({ bannerId }) => {
-
+const DetailsSliderForms = ({ bannerId }) => {
   const formKeysNotSubber = (event) => {
     if (event.key == "Enter") {
       event.preventDefault();
@@ -14,6 +13,7 @@ const DetailsBannerForms = ({ bannerId }) => {
   };
   const imageUrlRef = useRef();
   const imageAltRef = useRef();
+  const sorterRef = useRef();
   const imageLinkRef = useRef();
   const imageSituationRef = useRef();
 
@@ -23,6 +23,7 @@ const DetailsBannerForms = ({ bannerId }) => {
       goalId: bannerId,
       image: imageUrlRef.current.value,
       imageAlt: imageAltRef.current.value,
+      sorter: sorterRef.current.value,
       situation: imageSituationRef.current.value,
       link: imageLinkRef.current.value,
       date: new Date().toLocaleDateString("fa-IR", {
@@ -30,13 +31,13 @@ const DetailsBannerForms = ({ bannerId }) => {
         minute: "2-digit",
       }),
     };
-    const url = `https://7gardoon-server1.liara.run/api/updateBanners/${bannerId}`;
+    const url = `https://7gardoon-server1.liara.run/api/updateSliders/${bannerId}`;
 
     axios
       .post(url, formData)
       .then((d) => {
         if (formData.situation == "true") {
-          toast.success("بنر با موفقیت بروز رسانی شد", {
+          toast.success("اسلایدر با موفقیت بروز رسانی شد", {
             autoClose: 3000,
             hideProgressBar: false,
             closeOnClick: true,
@@ -45,7 +46,7 @@ const DetailsBannerForms = ({ bannerId }) => {
             progress: undefined,
           });
         } else {
-          toast.success("بنر بصورت پیش نویس ذخیره شد", {
+          toast.success("اسلایدر بصورت پیش نویس ذخیره شد", {
             autoClose: 3000,
             hideProgressBar: false,
             closeOnClick: true,
@@ -72,11 +73,11 @@ const DetailsBannerForms = ({ bannerId }) => {
   };
 
   const remover = () => {
-    const url = `https://7gardoon-server1.liara.run/api/deleteBanners/${bannerId}`;
+    const url = `https://7gardoon-server1.liara.run/api/deleteSlider/${bannerId}`;
     axios
       .post(url)
       .then((d) => {
-        toast.success("بنر با موفقیت حذف شد", {
+        toast.success("اسلایدر با موفقیت حذف شد", {
           autoClose: 3000,
           hideProgressBar: false,
           closeOnClick: true,
@@ -86,10 +87,10 @@ const DetailsBannerForms = ({ bannerId }) => {
         });
         setTimeout(()=>{
           window.location.href = "/dashboard";
-        },500) 
+        },500)
       })
       .catch((e) => {
-        toast.error("هنگام حذف بنر خطایی رخ داد", {
+        toast.error("هنگام حذف اسلایدر خطایی رخ داد", {
           autoClose: 3000,
           hideProgressBar: false,
           closeOnClick: true,
@@ -102,16 +103,18 @@ const DetailsBannerForms = ({ bannerId }) => {
 
   const [imageUrl, setImageUrl] = useState("");
   const [imageAlt, setImageAlt] = useState("");
+  const [sorter, setSorter] = useState("");
   const [imageLink, setImageLink] = useState("");
   const [imageSituation, setImageituation] = useState(true);
   const [fullData, setFullData] = useState(true);
 
   useEffect(() => {
     axios
-      .get(`https://7gardoon-server1.liara.run/api/banners/${bannerId}`)
+      .get(`https://7gardoon-server1.liara.run/api/slider/${bannerId}`)
       .then((d) => {
         setImageUrl(d.data.image);
         setImageAlt(d.data.imageAlt);
+        setSorter(d.data.sorter);
         setImageLink(d.data.link);
         setImageituation(d.data.situation);
         setFullData(d.data);
@@ -119,12 +122,10 @@ const DetailsBannerForms = ({ bannerId }) => {
       .catch((e) => console.log("error"));
   }, [bannerId]);
 
-  console.log("imageLink",imageLink)
-
   return (
     <div className="flex flex-col gap-8">
       <div className="flex justify-between items-center">
-        <h2 className="text-orange-500">جزئیات بنر</h2>
+        <h2 className="text-orange-500">جزئیات اسلایدر</h2>
         <button
           onClick={() => remover()}
           className="bg-rose-600 text-white px-6 py-3 rounded-md text-xs transition-all duration-500 hover:bg-rose-700"
@@ -134,10 +135,10 @@ const DetailsBannerForms = ({ bannerId }) => {
       </div>
       <div className="flex justify-between items-center">
         <div className="bg-zinc-200 rounded px-3 py-1 text-sm">
-          شناسه بنر : {fullData._id ? fullData._id : ""}
+          شناسه اسلایدر : {fullData._id ? fullData._id : ""}
         </div>
         <div className="bg-zinc-200 rounded px-3 py-1 text-sm">
-          تاریخ بروز رسانی بنر : {fullData.date ? fullData.date : ""}
+          تاریخ بروز رسانی اسلایدر : {fullData.date ? fullData.date : ""}
         </div>
       </div>
       <form
@@ -151,7 +152,7 @@ const DetailsBannerForms = ({ bannerId }) => {
             required={true}
             defaultValue={imageUrl}
             ref={imageUrlRef}
-            type="text"
+           type="text"
             className="inputLtr p-2 rounded-md w-full outline-none border-zinc-300 border-2 focus:border-orange-400"
           />
         </div>
@@ -161,7 +162,17 @@ const DetailsBannerForms = ({ bannerId }) => {
             required={true}
             defaultValue={imageAlt}
             ref={imageAltRef}
-            type="text"
+           type="text"
+            className="inputLtr p-2 rounded-md w-full outline-none border-zinc-300 border-2 focus:border-orange-400"
+          />
+        </div>
+        <div className="flex flex-col gap-2">
+          <div>سورتر جدید</div>
+          <input
+            required={true}
+            defaultValue={sorter}
+            ref={sorterRef}
+           type="number"
             className="inputLtr p-2 rounded-md w-full outline-none border-zinc-300 border-2 focus:border-orange-400"
           />
         </div>
@@ -171,7 +182,7 @@ const DetailsBannerForms = ({ bannerId }) => {
             required={true}
             defaultValue={imageLink}
             ref={imageLinkRef}
-            type="text"
+           type="text"
             className="inputLtr p-2 rounded-md w-full outline-none border-zinc-300 border-2 focus:border-orange-400"
           />
         </div>
@@ -219,4 +230,4 @@ const DetailsBannerForms = ({ bannerId }) => {
   );
 };
 
-export default DetailsBannerForms;
+export default DetailsSliderForms;

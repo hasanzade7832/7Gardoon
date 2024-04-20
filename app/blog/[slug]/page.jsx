@@ -11,7 +11,7 @@ import MostViewdPage from "@/components/mostViewedPost";
 
 const getData = async (slug) => {
   const data = await fetch(
-    `https://7gardoon-server.liara.run/api/post/${slug}`,
+    `https://7gardoon-server1.liara.run/api/post/${slug}`,
     { cache: "no-store" }
   );
   return data.json();
@@ -67,7 +67,7 @@ const SingleBlug = async ({ params }) => {
           <section className="flex flex-col gap-4">
             <h2 className="text-xl">مطالب مرتبط</h2>
             <RelatedPosts
-              title={"مقالات مرتبط"}
+              title={"پست های مرتبط"}
               relatedPostsData={data.relatedPosts}
             />
           </section>
