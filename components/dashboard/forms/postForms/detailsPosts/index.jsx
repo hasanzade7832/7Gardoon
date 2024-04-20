@@ -223,7 +223,16 @@ const DetailsBannerForms = ({ bannerId }) => {
         setRelPosts(d.data.relatedPosts);
         console.log("aaaaaaaa", d.data);
       })
-      .catch((e) => console.log("error"));
+      .catch((e) => {
+        toast.error("هنگام لود اطلاعات خطایی رخ داد", {
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        })
+      });
   }, [bannerId]);
 
   console.log("rrrrrrrrr", fullData.relatedPosts);

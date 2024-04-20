@@ -116,7 +116,16 @@ const DetailsBannerForms = ({ bannerId }) => {
         setImageituation(d.data.situation);
         setFullData(d.data);
       })
-      .catch((e) => console.log("error"));
+      .catch((e) =>{
+        toast.error("هنگام لود اطلاعات خطایی رخ داد", {
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        })  
+      });
   }, [bannerId]);
 
   console.log("imageLink",imageLink)

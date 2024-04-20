@@ -85,9 +85,9 @@ const DetailsSliderForms = ({ bannerId }) => {
           draggable: true,
           progress: undefined,
         });
-        setTimeout(()=>{
+        setTimeout(() => {
           window.location.href = "/dashboard";
-        },500)
+        }, 500)
       })
       .catch((e) => {
         toast.error("هنگام حذف اسلایدر خطایی رخ داد", {
@@ -119,7 +119,17 @@ const DetailsSliderForms = ({ bannerId }) => {
         setImageituation(d.data.situation);
         setFullData(d.data);
       })
-      .catch((e) => console.log("error"));
+      .catch((e) => {
+        toast.error("هنگام لود اطلاعات خطایی رخ داد", {
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        })
+      }
+      );
   }, [bannerId]);
 
   return (
@@ -152,7 +162,7 @@ const DetailsSliderForms = ({ bannerId }) => {
             required={true}
             defaultValue={imageUrl}
             ref={imageUrlRef}
-           type="text"
+            type="text"
             className="inputLtr p-2 rounded-md w-full outline-none border-zinc-300 border-2 focus:border-orange-400"
           />
         </div>
@@ -162,7 +172,7 @@ const DetailsSliderForms = ({ bannerId }) => {
             required={true}
             defaultValue={imageAlt}
             ref={imageAltRef}
-           type="text"
+            type="text"
             className="inputLtr p-2 rounded-md w-full outline-none border-zinc-300 border-2 focus:border-orange-400"
           />
         </div>
@@ -172,7 +182,7 @@ const DetailsSliderForms = ({ bannerId }) => {
             required={true}
             defaultValue={sorter}
             ref={sorterRef}
-           type="number"
+            type="number"
             className="inputLtr p-2 rounded-md w-full outline-none border-zinc-300 border-2 focus:border-orange-400"
           />
         </div>
@@ -182,7 +192,7 @@ const DetailsSliderForms = ({ bannerId }) => {
             required={true}
             defaultValue={imageLink}
             ref={imageLinkRef}
-           type="text"
+            type="text"
             className="inputLtr p-2 rounded-md w-full outline-none border-zinc-300 border-2 focus:border-orange-400"
           />
         </div>
