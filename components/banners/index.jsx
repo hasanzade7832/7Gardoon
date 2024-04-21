@@ -13,7 +13,9 @@ const Banners = async () => {
   const dataBanner = await getData();
 
   return (
-    <section className="container mx-auto flex justify-between items-center gap-12 flex-wrap">
+    <>
+    {dataBanner.length<1 ? (<></>) : (
+    <section className="container mx-auto flex justify-between items-center gap-12 flex-wrap mt-10">
       {dataBanner.map((banner, i) => (
         <Link href={banner.link} key={i}>
           <Image
@@ -27,6 +29,8 @@ const Banners = async () => {
         </Link>
       ))}
     </section>
+    )}
+    </>
   );
 };
 

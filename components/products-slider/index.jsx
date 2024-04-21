@@ -19,7 +19,7 @@ const ProductsSlider = ({ title, linkComp }) => {
   };
 
   return (
-    <div className="bg-indigo-500 container mx-auto mb-20 mt-20">
+    <div className="bg-indigo-500 container mx-auto mt-20">
       <div className="container mx-auto py-8">
         <section className="flex flex-col gap-4 px-2">
           <header className=" flex justify-between items-center">

@@ -33,7 +33,7 @@ const DetailsBannerForms = ({ bannerId }) => {
       let tagList = [...tag];
       const data = tagRef.current.value;
       if (data.length > 0) {
-        tagList = [...tag, data];
+        tagList = [...tag, data.replace(/\s+/g, '_').toLowerCase()];
         setTag(tagList);
       }
       tagRef.current.value = "";
@@ -391,7 +391,7 @@ const DetailsBannerForms = ({ bannerId }) => {
           </div>
         </div>
         <div>
-          <h1 className="bg-zinc-400 w-[7%] rounded px-3 py-1 text-sm mb-5 text-white">
+          <h1 className="bg-zinc-400 w-[10%] rounded px-3 py-1 text-sm mb-5 text-white">
             مقاله مرتبط
           </h1>
           {posts[0] == -1 ? (
