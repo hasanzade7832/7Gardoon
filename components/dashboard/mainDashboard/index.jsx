@@ -5,6 +5,7 @@ import DashboardCtrl from "../dashbordCtrl/index";
 import BannerForms from "../forms/bannersForms";
 import SlidersForms from "../forms/sliderForms";
 import PostForms from "../forms/postForms";
+import CategoryForms from "../forms/categoryForms";
 
 const MainDashboard = () => {
   const [contentChanger, setContentChanger] = useState("banners");
@@ -17,6 +18,8 @@ const MainDashboard = () => {
       setDetails(<SlidersForms />);
     } else if (contentChanger == "posts") {
       setDetails(<PostForms />);
+    } else if (contentChanger == "Categories") {
+      setDetails(<CategoryForms />);
     }
   }, [contentChanger]);
 
