@@ -5,39 +5,41 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 
-const DetailsSliderForms = ({ bannerId }) => {
+const DetailsCategoryForms = ({ bannerId }) => {
   const formKeysNotSubber = (event) => {
     if (event.key == "Enter") {
       event.preventDefault();
     }
   };
+  const titleRef = useRef();
+  const slugRef = useRef();
   const imageUrlRef = useRef();
   const imageAltRef = useRef();
-  const sorterRef = useRef();
-  const imageLinkRef = useRef();
-  const imageSituationRef = useRef();
+  const shortDescRef = useRef();
+  const situationRef = useRef(true);
 
   const updater = (e) => {
     e.preventDefault();
     const formData = {
       goalId: bannerId,
+      title: titleRef.current.value,
+      slug: slugRef.current.value,
       image: imageUrlRef.current.value,
       imageAlt: imageAltRef.current.value,
-      sorter: sorterRef.current.value,
-      situation: imageSituationRef.current.value,
-      link: imageLinkRef.current.value,
+      situation: situationRef.current.value,
+      shortDesc: shortDescRef.current.value,
       date: new Date().toLocaleDateString("fa-IR", {
         hour: "2-digit",
         minute: "2-digit",
       }),
     };
-    const url = `https://7gardoon-server1.liara.run/api/updateSliders/${bannerId}`;
+    const url = `https://7gardoon-server1.liara.run/api/updateCategories/${bannerId}`;
 
     axios
       .post(url, formData)
       .then((d) => {
         if (formData.situation == "true") {
-          toast.success("اسلایدر با موفقیت بروز رسانی شد", {
+          toast.success("دسته با موفقیت بروز رسانی شد", {
             autoClose: 3000,
             hideProgressBar: false,
             closeOnClick: true,
@@ -46,7 +48,7 @@ const DetailsSliderForms = ({ bannerId }) => {
             progress: undefined,
           });
         } else {
-          toast.success("اسلایدر بصورت پیش نویس ذخیره شد", {
+          toast.success("دسته بصورت پیش نویس ذخیره شد", {
             autoClose: 3000,
             hideProgressBar: false,
             closeOnClick: true,
@@ -73,11 +75,11 @@ const DetailsSliderForms = ({ bannerId }) => {
   };
 
   const remover = () => {
-    const url = `https://7gardoon-server1.liara.run/api/deleteSlider/${bannerId}`;
+    const url = `https://7gardoon-server1.liara.run/api/deleteCategories/${bannerId}`;
     axios
       .post(url)
       .then((d) => {
-        toast.success("اسلایدر با موفقیت حذف شد", {
+        toast.success("دسته با موفقیت حذف شد", {
           autoClose: 3000,
           hideProgressBar: false,
           closeOnClick: true,
@@ -87,10 +89,10 @@ const DetailsSliderForms = ({ bannerId }) => {
         });
         setTimeout(() => {
           window.location.href = "/dashboard";
-        }, 500)
+        }, 500);
       })
       .catch((e) => {
-        toast.error("هنگام حذف اسلایدر خطایی رخ داد", {
+        toast.error("هنگام حذف دسته خطایی رخ داد", {
           autoClose: 3000,
           hideProgressBar: false,
           closeOnClick: true,
@@ -101,22 +103,14 @@ const DetailsSliderForms = ({ bannerId }) => {
       });
   };
 
-  const [imageUrl, setImageUrl] = useState("");
-  const [imageAlt, setImageAlt] = useState("");
-  const [sorter, setSorter] = useState("");
-  const [imageLink, setImageLink] = useState("");
-  const [imageSituation, setImageituation] = useState(true);
   const [fullData, setFullData] = useState(true);
 
   useEffect(() => {
     axios
-      .get(`https://7gardoon-server1.liara.run/api/slider/${bannerId}`)
+      .get(
+        `https://7gardoon-server1.liara.run/api/get-categoryById/${bannerId}`
+      )
       .then((d) => {
-        setImageUrl(d.data.image);
-        setImageAlt(d.data.imageAlt);
-        setSorter(d.data.sorter);
-        setImageLink(d.data.link);
-        setImageituation(d.data.situation);
         setFullData(d.data);
       })
       .catch((e) => {
@@ -127,15 +121,14 @@ const DetailsSliderForms = ({ bannerId }) => {
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-        })
-      }
-      );
+        });
+      });
   }, [bannerId]);
 
   return (
     <div className="flex flex-col gap-8">
       <div className="flex justify-between items-center">
-        <h2 className="text-orange-500">جزئیات اسلایدر</h2>
+        <h2 className="text-orange-500">جزئیات دسته</h2>
         <button
           onClick={() => remover()}
           className="bg-rose-600 text-white px-6 py-3 rounded-md text-xs transition-all duration-500 hover:bg-rose-700"
@@ -145,10 +138,10 @@ const DetailsSliderForms = ({ bannerId }) => {
       </div>
       <div className="flex justify-between items-center">
         <div className="bg-zinc-200 rounded px-3 py-1 text-sm">
-          شناسه اسلایدر : {fullData._id ? fullData._id : ""}
+          شناسه دسته : {fullData._id ? fullData._id : ""}
         </div>
         <div className="bg-zinc-200 rounded px-3 py-1 text-sm">
-          تاریخ بروز رسانی اسلایدر : {fullData.date ? fullData.date : ""}
+          تاریخ بروز رسانی دسته : {fullData.date ? fullData.date : ""}
         </div>
       </div>
       <form
@@ -157,10 +150,30 @@ const DetailsSliderForms = ({ bannerId }) => {
         className="flex flex-col gap-6"
       >
         <div className="flex flex-col gap-2">
+          <div>عنوان جدید دسته</div>
+          <input
+            required={true}
+            defaultValue={fullData.title}
+            ref={titleRef}
+            type="text"
+            className="p-2 rounded-md w-full outline-none border-zinc-300 border-2 focus:border-orange-400"
+          />
+        </div>
+        <div className="flex flex-col gap-2">
+          <div>اسلاگ جدید دسته</div>
+          <input
+            required={true}
+            defaultValue={fullData.slug}
+            ref={slugRef}
+            type="text"
+            className="inputLtr p-2 rounded-md w-full outline-none border-zinc-300 border-2 focus:border-orange-400"
+          />
+        </div>
+        <div className="flex flex-col gap-2">
           <div>آدرس جدید عکس</div>
           <input
             required={true}
-            defaultValue={imageUrl}
+            defaultValue={fullData.image}
             ref={imageUrlRef}
             type="text"
             className="inputLtr p-2 rounded-md w-full outline-none border-zinc-300 border-2 focus:border-orange-400"
@@ -170,48 +183,37 @@ const DetailsSliderForms = ({ bannerId }) => {
           <div>آلت جدید عکس</div>
           <input
             required={true}
-            defaultValue={imageAlt}
+            defaultValue={fullData.imageAlt}
             ref={imageAltRef}
             type="text"
             className="inputLtr p-2 rounded-md w-full outline-none border-zinc-300 border-2 focus:border-orange-400"
           />
         </div>
         <div className="flex flex-col gap-2">
-          <div>سورتر جدید</div>
+          <div>توضیحات کوتاه جدید </div>
           <input
             required={true}
-            defaultValue={sorter}
-            ref={sorterRef}
-            type="number"
-            className="inputLtr p-2 rounded-md w-full outline-none border-zinc-300 border-2 focus:border-orange-400"
-          />
-        </div>
-        <div className="flex flex-col gap-2">
-          <div>لینک جدید عکس</div>
-          <input
-            required={true}
-            defaultValue={imageLink}
-            ref={imageLinkRef}
+            defaultValue={fullData.shortDesc}
+            ref={shortDescRef}
             type="text"
-            className="inputLtr p-2 rounded-md w-full outline-none border-zinc-300 border-2 focus:border-orange-400"
+            className=" p-2 rounded-md w-full outline-none border-zinc-300 border-2 focus:border-orange-400"
           />
         </div>
         <div className="flex flex-col gap-2">
-          <div>روشن و خاموش</div>
+          <div>انتشار و پیش نویس</div>
           <select
-            defaultValue={imageSituation}
-            ref={imageSituationRef}
+            ref={situationRef}
             className="p-2 rounded-md w-full outline-none border-zinc-300 border-2 focus:border-orange-400"
           >
-            {imageSituation == true ? (
+            {fullData.situation == true ? (
               <>
-                <option value={true}>روشن</option>
-                <option value={false}>خاموش</option>
+                <option value={true}>انتشار</option>
+                <option value={false}>پیش نویس</option>
               </>
             ) : (
               <>
-                <option value={false}>خاموش</option>
-                <option value={true}>روشن</option>
+                <option value={false}>پیش نویس</option>
+                <option value={true}>انتشار</option>
               </>
             )}
           </select>
@@ -240,4 +242,4 @@ const DetailsSliderForms = ({ bannerId }) => {
   );
 };
 
-export default DetailsSliderForms;
+export default DetailsCategoryForms;

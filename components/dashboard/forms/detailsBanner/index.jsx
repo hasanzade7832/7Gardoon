@@ -6,7 +6,6 @@ import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 
 const DetailsBannerForms = ({ bannerId }) => {
-
   const formKeysNotSubber = (event) => {
     if (event.key == "Enter") {
       event.preventDefault();
@@ -84,9 +83,9 @@ const DetailsBannerForms = ({ bannerId }) => {
           draggable: true,
           progress: undefined,
         });
-        setTimeout(()=>{
+        setTimeout(() => {
           window.location.href = "/dashboard";
-        },500) 
+        }, 500);
       })
       .catch((e) => {
         toast.error("هنگام حذف بنر خطایی رخ داد", {
@@ -116,7 +115,7 @@ const DetailsBannerForms = ({ bannerId }) => {
         setImageituation(d.data.situation);
         setFullData(d.data);
       })
-      .catch((e) =>{
+      .catch((e) => {
         toast.error("هنگام لود اطلاعات خطایی رخ داد", {
           autoClose: 3000,
           hideProgressBar: false,
@@ -124,11 +123,11 @@ const DetailsBannerForms = ({ bannerId }) => {
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-        })  
+        });
       });
   }, [bannerId]);
 
-  console.log("imageLink",imageLink)
+  console.log("imageLink", imageLink);
 
   return (
     <div className="flex flex-col gap-8">

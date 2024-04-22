@@ -10,7 +10,7 @@ const Box = ({ data, setBannerDetail, setRandNumForBannerClick }) => {
         setBannerDetail(data._id);
         setRandNumForBannerClick(Math.random());
       }}
-      className="relative flex justify-between items-center cursor-pointer p-6 w-full rounded-lg bg-zinc-100 border-2 border-zinc-200 transition-all duration-500 hover:border-orange-400"
+      className="relative flex justify-start px-4 items-center cursor-pointer p-6 w-full rounded-lg bg-zinc-100 border-2 border-zinc-200 transition-all duration-500 hover:border-orange-400"
     >
       {/* <div className="flex justify-start items-center"> */}
       <Image
@@ -18,25 +18,25 @@ const Box = ({ data, setBannerDetail, setRandNumForBannerClick }) => {
         src={data.image}
         alt={data.imageAlt}
         title={data.imageAlt}
-        width={500}
-        height={250}
+        width={100}
+        height={100}
       />
       {/* </div> */}
-      <div className="flex items-center gap-3 absolute bottom-3 left-3">
-        {data.situation == true ? (
-          <div className="text-xs bg-green-600 text-white px-3 py-1 rounded">
-            روشن
+      <div className="flex flex-col gap-4 px-8 h-20">
+        <div>{data.title}</div>
+        <div className="absolute bottom-3 left-3 flex justify-end items-center gap-2">
+          <div className="text-xs bg-orange-600 text-white px-6 py-1 rounded">
+            بازدید {data.pageView}
           </div>
-        ) : (
-          <div className="text-xs bg-rose-600 text-white px-3 py-1 rounded">
-            خاموش
-          </div>
-        )}
-        <div className="text-xs bg-orange-600 text-white px-3 py-1 rounded">
-          {data.date}
-        </div>
-        <div className="text-xs bg-orange-600 text-white px-3 py-1 rounded">
-          اسلایدر {data.sorter} م
+          {data.situation == true ? (
+            <div className="text-xs bg-green-600 text-white px-3 py-1 rounded">
+              منتشر شده
+            </div>
+          ) : (
+            <div className="text-xs bg-orange-500 text-white px-3 py-1 rounded">
+              پیش نویس
+            </div>
+          )}
         </div>
       </div>
     </div>

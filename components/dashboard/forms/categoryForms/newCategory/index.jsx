@@ -6,36 +6,36 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 
-const NewSliderForms = () => {
+const NewCategories = () => {
+  const titleRef = useRef();
+  const slugRef = useRef();
   const imageUrlRef = useRef();
   const imageAltRef = useRef();
-  const sorterRef = useRef();
-  const imageLinkRef = useRef();
+  const shortDescRef = useRef();
   const imageSituationRef = useRef();
 
   const submitter = (e) => {
-    console.log("link", imageLinkRef.current.value);
     e.preventDefault();
     const formData = {
+      title: titleRef.current.value,
+      slug: slugRef.current.value,
       image: imageUrlRef.current.value,
       imageAlt: imageAltRef.current.value,
-      sorter: sorterRef.current.value,
       situation: imageSituationRef.current.value,
-      link: imageLinkRef.current.value,
+      shortDesc: shortDescRef.current.value,
       date: new Date().toLocaleDateString("fa-IR", {
         hour: "2-digit",
         minute: "2-digit",
       }),
     };
 
-    const url = `https://7gardoon-server1.liara.run/api/newSliders`;
+    const url = `https://7gardoon-server1.liara.run/api/newCategories`;
 
     axios
       .post(url, formData)
       .then((d) => {
-  
         if (formData.situation == "true") {
-          toast.success("اسلایدر با موفقیت منتشر شد", {
+          toast.success("دسته با موفقیت منتشر شد", {
             autoClose: 3000,
             hideProgressBar: false,
             closeOnClick: true,
@@ -43,16 +43,16 @@ const NewSliderForms = () => {
             draggable: true,
             progress: undefined,
           });
-          imageLinkRef.current.value = "";
+          titleRef.current.value = "";
+          slugRef.current.value = "";
           imageUrlRef.current.value = "";
-          sorterRef.current.value = null;
           imageAltRef.current.value = "";
           imageSituationRef.current.value = true;
-          setTimeout(()=>{
+          setTimeout(() => {
             window.location.href = "/dashboard";
-          },500)
+          }, 500);
         } else {
-          toast.success("اسلایدر بصورت پیش نویس ذخیره", {
+          toast.success("دسته بصورت پیش نویس ذخیره", {
             autoClose: 3000,
             hideProgressBar: false,
             closeOnClick: true,
@@ -60,18 +60,19 @@ const NewSliderForms = () => {
             draggable: true,
             progress: undefined,
           });
-          imageLinkRef.current.value = "";
+          titleRef.current.value = "";
+          slugRef.current.value = "";
           imageUrlRef.current.value = "";
           imageAltRef.current.value = "";
           imageSituationRef.current.value = true;
-          sorterRef.current.value = null;
-          setTimeout(()=>{
+          setTimeout(() => {
             window.location.href = "/dashboard";
-          },500)
+          }, 500);
         }
       })
       .catch((e) => {
         let message = "متاسفانه ناموفق بود.";
+        console.log("ggggggggg", e.response);
         if (e.response.data.msg) {
           message = e.response.data.msg;
         }
@@ -93,12 +94,30 @@ const NewSliderForms = () => {
   };
   return (
     <div className="flex flex-col gap-8">
-      <h2 className="text-orange-500">اسلایدر جدید</h2>
+      <h2 className="text-orange-500">دسته جدید</h2>
       <form
         onSubmit={submitter}
         className="flex flex-col gap-6"
         onKeyDown={formKeysNotSubber}
       >
+        <div className="flex flex-col gap-2">
+          <div>عنوان دسته محصول</div>
+          <input
+            required={true}
+            ref={titleRef}
+            type="text"
+            className="p-2 rounded-md w-full outline-none border-zinc-300 border-2 focus:border-orange-400"
+          />
+        </div>
+        <div className="flex flex-col gap-2">
+          <div>اسلاگ دسته محصول</div>
+          <input
+            required={true}
+            ref={slugRef}
+            type="text"
+            className="inputLtr p-2 rounded-md w-full outline-none border-zinc-300 border-2 focus:border-orange-400"
+          />
+        </div>
         <div className="flex flex-col gap-2">
           <div>آدرس عکس</div>
           <input
@@ -118,31 +137,22 @@ const NewSliderForms = () => {
           />
         </div>
         <div className="flex flex-col gap-2">
-          <div>سورتر اسلایدر</div>
+          <div>توضیحات کوتاه</div>
           <input
             required={true}
-            ref={sorterRef}
-            type="number"
+            ref={shortDescRef}
+            type="text"
             className="p-2 rounded-md w-full outline-none border-zinc-300 border-2 focus:border-orange-400"
           />
         </div>
         <div className="flex flex-col gap-2">
-          <div>لینک عکس</div>
-          <input
-            required={true}
-            ref={imageLinkRef}
-            type="text"
-            className="inputLtr p-2 rounded-md w-full outline-none border-zinc-300 border-2 focus:border-orange-400"
-          />
-        </div>
-        <div className="flex flex-col gap-2">
-          <div>روشن و خاموش</div>
+          <div>انتشار یا پیش نویس</div>
           <select
             ref={imageSituationRef}
             className="p-2 rounded-md w-full outline-none border-zinc-300 border-2 focus:border-orange-400"
           >
-            <option value={true}>روشن</option>
-            <option value={false}>خاموش</option>
+            <option value={true}>انتشار</option>
+            <option value={false}>پیش نویس</option>
           </select>
         </div>
         <button
@@ -169,4 +179,4 @@ const NewSliderForms = () => {
   );
 };
 
-export default NewSliderForms;
+export default NewCategories;

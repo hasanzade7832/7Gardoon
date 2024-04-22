@@ -27,11 +27,11 @@ const AllCategories = ({ setBannerDetail, setRandNumForBannerClick }) => {
   const [numberOfPage, setNumberOfPage] = useState([-1]);
 
   //تعداد کل بنرها
-  const [allSlidersNum, setAllBannersNum] = useState(0);
+  const [allCategoriesNum, setAllCategoreisNum] = useState(0);
 
   const [filterBtns, setFilterBtns] = useState([-1]);
 
-  const paginate =10;
+  const paginate = 10;
 
   useEffect(() => {
     axios
@@ -41,9 +41,11 @@ const AllCategories = ({ setBannerDetail, setRandNumForBannerClick }) => {
       .then((res) => {
         setCategories(res.data.categories);
         setNumberOfPage(
-          Array.from(Array(Math.ceil(res.data.allCtegoriesNum / paginate)).keys())
+          Array.from(
+            Array(Math.ceil(res.data.allCtegoriesNum / paginate)).keys()
+          )
         );
-        setAllBannersNum(res.data.allCtegoriesNum);
+        setAllCategoreisNum(res.data.allCtegoriesNum);
       })
       .catch((err) => {
         toast.error("خطا در لود اطلاعات", {
@@ -79,7 +81,7 @@ const AllCategories = ({ setBannerDetail, setRandNumForBannerClick }) => {
     <div className="flex flex-col gap-8">
       <div className="flex justify-end">
         <div className="w-32 h-10 rounded bg-indigo-500 flex justify-center items-center text-white">
-          {allSlidersNum} اسلایدر
+          {allCategoriesNum} دسته
         </div>
       </div>
       <div className="flex flex-col gap-6 ">
@@ -96,7 +98,7 @@ const AllCategories = ({ setBannerDetail, setRandNumForBannerClick }) => {
         ) : categories.length < 1 ? (
           <div className="flex justify-center items-center">
             <div className="flex justify-center items-center w-[32rem] p-8 bg-rose-600 text-white">
-              اسلایدری موجود نیست
+              دسته ای موجود نیست
             </div>
           </div>
         ) : (
@@ -143,7 +145,7 @@ const AllCategories = ({ setBannerDetail, setRandNumForBannerClick }) => {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-      /> 
+      />
     </div>
   );
 };

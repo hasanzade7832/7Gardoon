@@ -1,15 +1,15 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import AllSlidersForms from "./allCategory/index";
-import NewSlider from "./newCategory/index";
-import DetailsSliderForms from "./detailsCategory/index";
+import AllCategoriesForms from "./allCategory/index";
+import NewCategory from "./newCategory/index";
+import DetailsCategoriesForms from "./detailsCategory/index";
 
 const CategoryForms = () => {
   const [bannerDetail, setBannerDetail] = useState("");
   const [randNumForBannerClick, setRandNumForBannerClick] = useState(1);
   const [allOrNew, setAllOrNew] = useState(
-    <AllSlidersForms
+    <AllCategoriesForms
       setBannerDetail={setBannerDetail}
       setRandNumForBannerClick={setRandNumForBannerClick}
     />
@@ -17,7 +17,7 @@ const CategoryForms = () => {
 
   useEffect(() => {
     if (bannerDetail != "") {
-      setAllOrNew(<DetailsSliderForms bannerId={bannerDetail} />);
+      setAllOrNew(<DetailsCategoriesForms bannerId={bannerDetail} />);
     }
   }, [bannerDetail, randNumForBannerClick]);
 
@@ -29,7 +29,7 @@ const CategoryForms = () => {
           <button
             onClick={() =>
               setAllOrNew(
-                <AllSlidersForms
+                <AllCategoriesForms
                   setBannerDetail={setBannerDetail}
                   setRandNumForBannerClick={setRandNumForBannerClick}
                 />
@@ -40,7 +40,7 @@ const CategoryForms = () => {
             همه
           </button>
           <button
-            onClick={() => setAllOrNew(<NewSlider />)}
+            onClick={() => setAllOrNew(<NewCategory />)}
             className="flex justify-center items-center w-32 h-10 px-3 py-1 bg-indigo-600 text-white transition-all duration-500 hover:bg-orange-500"
           >
             دسته جدید

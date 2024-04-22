@@ -87,7 +87,7 @@ const DetailsSliderForms = ({ bannerId }) => {
         });
         setTimeout(() => {
           window.location.href = "/dashboard";
-        }, 500)
+        }, 500);
       })
       .catch((e) => {
         toast.error("هنگام حذف اسلایدر خطایی رخ داد", {
@@ -101,22 +101,12 @@ const DetailsSliderForms = ({ bannerId }) => {
       });
   };
 
-  const [imageUrl, setImageUrl] = useState("");
-  const [imageAlt, setImageAlt] = useState("");
-  const [sorter, setSorter] = useState("");
-  const [imageLink, setImageLink] = useState("");
-  const [imageSituation, setImageituation] = useState(true);
   const [fullData, setFullData] = useState(true);
 
   useEffect(() => {
     axios
       .get(`https://7gardoon-server1.liara.run/api/slider/${bannerId}`)
       .then((d) => {
-        setImageUrl(d.data.image);
-        setImageAlt(d.data.imageAlt);
-        setSorter(d.data.sorter);
-        setImageLink(d.data.link);
-        setImageituation(d.data.situation);
         setFullData(d.data);
       })
       .catch((e) => {
@@ -127,9 +117,8 @@ const DetailsSliderForms = ({ bannerId }) => {
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-        })
-      }
-      );
+        });
+      });
   }, [bannerId]);
 
   return (
@@ -160,7 +149,7 @@ const DetailsSliderForms = ({ bannerId }) => {
           <div>آدرس جدید عکس</div>
           <input
             required={true}
-            defaultValue={imageUrl}
+            defaultValue={fullData.image}
             ref={imageUrlRef}
             type="text"
             className="inputLtr p-2 rounded-md w-full outline-none border-zinc-300 border-2 focus:border-orange-400"
@@ -170,7 +159,7 @@ const DetailsSliderForms = ({ bannerId }) => {
           <div>آلت جدید عکس</div>
           <input
             required={true}
-            defaultValue={imageAlt}
+            defaultValue={fullData.imageAlt}
             ref={imageAltRef}
             type="text"
             className="inputLtr p-2 rounded-md w-full outline-none border-zinc-300 border-2 focus:border-orange-400"
@@ -180,7 +169,7 @@ const DetailsSliderForms = ({ bannerId }) => {
           <div>سورتر جدید</div>
           <input
             required={true}
-            defaultValue={sorter}
+            defaultValue={fullData.sorter}
             ref={sorterRef}
             type="number"
             className="inputLtr p-2 rounded-md w-full outline-none border-zinc-300 border-2 focus:border-orange-400"
@@ -190,7 +179,7 @@ const DetailsSliderForms = ({ bannerId }) => {
           <div>لینک جدید عکس</div>
           <input
             required={true}
-            defaultValue={imageLink}
+            defaultValue={fullData.link}
             ref={imageLinkRef}
             type="text"
             className="inputLtr p-2 rounded-md w-full outline-none border-zinc-300 border-2 focus:border-orange-400"
@@ -199,11 +188,11 @@ const DetailsSliderForms = ({ bannerId }) => {
         <div className="flex flex-col gap-2">
           <div>روشن و خاموش</div>
           <select
-            defaultValue={imageSituation}
+            defaultValue={fullData.situation}
             ref={imageSituationRef}
             className="p-2 rounded-md w-full outline-none border-zinc-300 border-2 focus:border-orange-400"
           >
-            {imageSituation == true ? (
+            {fullData.situation == true ? (
               <>
                 <option value={true}>روشن</option>
                 <option value={false}>خاموش</option>

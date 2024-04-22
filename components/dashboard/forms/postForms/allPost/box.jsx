@@ -37,7 +37,7 @@ const Box = ({ data, setBannerDetail, setRandNumForBannerClick }) => {
             </div>
           ) : (
             <div className="text-xs bg-orange-500 text-white px-3 py-1 rounded">
-              منتشر نشده
+              پیش نویس
             </div>
           )}
         </div>
