@@ -11,8 +11,9 @@ const NewCategories = () => {
   const slugRef = useRef();
   const imageUrlRef = useRef();
   const imageAltRef = useRef();
+  const situationRef = useRef(true);
   const shortDescRef = useRef();
-  const imageSituationRef = useRef();
+  const typeOfProductRef = useRef();
 
   const submitter = (e) => {
     e.preventDefault();
@@ -21,8 +22,9 @@ const NewCategories = () => {
       slug: slugRef.current.value,
       image: imageUrlRef.current.value,
       imageAlt: imageAltRef.current.value,
-      situation: imageSituationRef.current.value,
+      situation: situationRef.current.value,
       shortDesc: shortDescRef.current.value,
+      typeOfProduct: typeOfProductRef.current.value,
       date: new Date().toLocaleDateString("fa-IR", {
         hour: "2-digit",
         minute: "2-digit",
@@ -31,6 +33,13 @@ const NewCategories = () => {
 
     const url = `https://7gardoon-server1.liara.run/api/newCategories`;
 
+    console.log("title",titleRef.current.value);
+    console.log("slug",slugRef.current.value);
+    console.log("image",imageUrlRef.current.value);
+    console.log("imageAlt",imageAltRef.current.value);
+    console.log("situation",situationRef.current.value);
+    console.log("shortdesc",shortDescRef.current.value);
+    
     axios
       .post(url, formData)
       .then((d) => {
@@ -43,11 +52,7 @@ const NewCategories = () => {
             draggable: true,
             progress: undefined,
           });
-          titleRef.current.value = "";
-          slugRef.current.value = "";
-          imageUrlRef.current.value = "";
-          imageAltRef.current.value = "";
-          imageSituationRef.current.value = true;
+
           setTimeout(() => {
             window.location.href = "/dashboard";
           }, 500);
@@ -60,11 +65,6 @@ const NewCategories = () => {
             draggable: true,
             progress: undefined,
           });
-          titleRef.current.value = "";
-          slugRef.current.value = "";
-          imageUrlRef.current.value = "";
-          imageAltRef.current.value = "";
-          imageSituationRef.current.value = true;
           setTimeout(() => {
             window.location.href = "/dashboard";
           }, 500);
@@ -72,7 +72,6 @@ const NewCategories = () => {
       })
       .catch((e) => {
         let message = "متاسفانه ناموفق بود.";
-        console.log("ggggggggg", e.response);
         if (e.response.data.msg) {
           message = e.response.data.msg;
         }
@@ -148,11 +147,22 @@ const NewCategories = () => {
         <div className="flex flex-col gap-2">
           <div>انتشار یا پیش نویس</div>
           <select
-            ref={imageSituationRef}
+            ref={situationRef}
             className="p-2 rounded-md w-full outline-none border-zinc-300 border-2 focus:border-orange-400"
           >
             <option value={true}>انتشار</option>
             <option value={false}>پیش نویس</option>
+          </select>
+        </div>
+        <div className="flex flex-col gap-2">
+          <div>نوع دسته بندی محصول</div>
+          <select
+            ref={typeOfProductRef}
+            className="p-2 rounded-md w-full outline-none border-zinc-300 border-2 focus:border-orange-400"
+          >
+            <option value={"book"}>کتاب</option>
+            <option value={"app"}>اپلیکیشن</option>
+            <option value={"graphic"}>فایل گرافیکی</option>
           </select>
         </div>
         <button

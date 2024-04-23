@@ -3,7 +3,7 @@
 import Image from "next/image";
 
 const Box = ({ data, setBannerDetail, setRandNumForBannerClick }) => {
-  console.log("setBannerDetail", setBannerDetail);
+  console.log("data.typeOfProduct", data);
   return (
     <div
       onClick={() => {
@@ -24,19 +24,22 @@ const Box = ({ data, setBannerDetail, setRandNumForBannerClick }) => {
       {/* </div> */}
       <div className="flex flex-col gap-4 px-8 h-20">
         <div>{data.title}</div>
-        <div className="absolute bottom-3 left-3 flex justify-end items-center gap-2">
-          <div className="text-xs bg-orange-600 text-white px-6 py-1 rounded">
-            بازدید {data.pageView}
-          </div>
+        <div className="text-xs absolute bottom-3 left-3 flex justify-end items-center gap-2">
+        <div className="bg-blue-600 text-white px-3 py-1 rounded">{data.typeOfProduct}</div>
+          <div>
           {data.situation == true ? (
-            <div className="text-xs bg-green-600 text-white px-3 py-1 rounded">
+            <div className="bg-green-600 px-3 py-1 rounded text-white">
               منتشر شده
             </div>
           ) : (
-            <div className="text-xs bg-orange-500 text-white px-3 py-1 rounded">
+            <div className="bg-orange-500">
               پیش نویس
             </div>
           )}
+          </div>
+         <div>
+         
+         </div>
         </div>
       </div>
     </div>
