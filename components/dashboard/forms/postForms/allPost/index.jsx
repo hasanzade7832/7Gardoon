@@ -31,7 +31,7 @@ const AllPostsForms = ({ setBannerDetail, setRandNumForBannerClick }) => {
 
   const [filterBtns, setFilterBtns] = useState([-1]);
 
-  const paginate = 10;
+  const paginate = 1;
 
   useEffect(() => {
     axios
@@ -39,7 +39,6 @@ const AllPostsForms = ({ setBannerDetail, setRandNumForBannerClick }) => {
         `https://7gardoon-server1.liara.run/api/post?pn=${pageNumber}&&pgn=${paginate}`
       )
       .then((res) => {
-        console.log("res", res.data);
         setPosts(res.data.posts);
         setNumberOfPage(
           Array.from(Array(Math.ceil(res.data.allPostsNum / paginate)).keys())
@@ -101,10 +100,10 @@ const AllPostsForms = ({ setBannerDetail, setRandNumForBannerClick }) => {
             </div>
           </div>
         ) : (
-          posts.map((da, i) => (
+          posts.map((data, i) => (
             <Box
               key={i}
-              data={da}
+              data={data}
               setBannerDetail={setBannerDetail}
               setRandNumForBannerClick={setRandNumForBannerClick}
             />
@@ -119,10 +118,14 @@ const AllPostsForms = ({ setBannerDetail, setRandNumForBannerClick }) => {
         ) : (
           filterBtns.map((data, i) => (
             <button
-              className="bg-indigo-500 text-white w-8 h-8 flex justify-center items-center rounded transition-all duration-500 hover:bg-orange-500"
+              className={
+                data + 1 == pageNumber
+                  ? "bg-orange-400 text-white w-8 h-8 flex justify-center items-center rounded transition-all duration-500 hover:bg-orange-500"
+                  : "bg-indigo-500 text-white w-8 h-8 flex justify-center items-center rounded transition-all duration-500 hover:bg-orange-500"
+              }
               onClick={() => {
+                data + 1 == pageNumber ? console.log("") : setPosts([-1]);
                 setPageNumber(data + 1);
-                setPosts([-1]);
                 goTopCtrl();
               }}
               key={i}
@@ -144,7 +147,7 @@ const AllPostsForms = ({ setBannerDetail, setRandNumForBannerClick }) => {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-      /> 
+      />
     </div>
   );
 };
