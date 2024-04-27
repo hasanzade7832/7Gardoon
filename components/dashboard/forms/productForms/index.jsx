@@ -29,7 +29,7 @@ const ProductForms = () => {
           <button
             onClick={() =>
               setAllOrNew(
-                <AllPostForms
+                <AllProductForms
                   setBannerDetail={setBannerDetail}
                   setRandNumForBannerClick={setRandNumForBannerClick}
                 />
