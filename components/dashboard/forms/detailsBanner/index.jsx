@@ -29,7 +29,7 @@ const DetailsBannerForms = ({ bannerId }) => {
         minute: "2-digit",
       }),
     };
-    const url = `https://7gardoon-server1.liara.run/api/updateBanners/${bannerId}`;
+    const url = `https://7gardoon-server3.liara.run/api/updateBanners/${bannerId}`;
 
     axios
       .post(url, formData)
@@ -71,7 +71,7 @@ const DetailsBannerForms = ({ bannerId }) => {
   };
 
   const remover = () => {
-    const url = `https://7gardoon-server1.liara.run/api/deleteBanners/${bannerId}`;
+    const url = `https://7gardoon-server3.liara.run/api/deleteBanners/${bannerId}`;
     axios
       .post(url)
       .then((d) => {
@@ -107,7 +107,7 @@ const DetailsBannerForms = ({ bannerId }) => {
 
   useEffect(() => {
     axios
-      .get(`https://7gardoon-server1.liara.run/api/banners/${bannerId}`)
+      .get(`https://7gardoon-server3.liara.run/api/banners/${bannerId}`)
       .then((d) => {
         setImageUrl(d.data.image);
         setImageAlt(d.data.imageAlt);

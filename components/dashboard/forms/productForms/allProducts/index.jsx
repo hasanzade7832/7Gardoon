@@ -36,7 +36,7 @@ const AllPostsForms = ({ setBannerDetail, setRandNumForBannerClick }) => {
   useEffect(() => {
     axios
       .get(
-        `https://7gardoon-server1.liara.run/api/post?pn=${pageNumber}&&pgn=${paginate}`
+        `https://7gardoon-server3.liara.run/api/post?pn=${pageNumber}&&pgn=${paginate}`
       )
       .then((res) => {
         console.log("res", res.data);

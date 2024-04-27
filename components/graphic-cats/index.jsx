@@ -1,6 +1,6 @@
 const getData = async () => {
   const data = await fetch(
-    "https://7gardoon-server1.liara.run/api/activeCategories",
+    "https://7gardoon-server3.liara.run/api/activeCategories",
     { cache: "no-store" }
   );
   return data.json();

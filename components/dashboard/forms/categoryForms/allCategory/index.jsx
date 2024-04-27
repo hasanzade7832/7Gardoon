@@ -36,7 +36,7 @@ const AllCategories = ({ setBannerDetail, setRandNumForBannerClick }) => {
   useEffect(() => {
     axios
       .get(
-        `https://7gardoon-server1.liara.run/api/categories?pn=${pageNumber}&&pgn=${paginate}`
+        `https://7gardoon-server3.liara.run/api/categories?pn=${pageNumber}&&pgn=${paginate}`
       )
       .then((res) => {
         setCategories(res.data.categories);

@@ -10,7 +10,7 @@ const MostViewedPosts = () => {
 
   useEffect(() => {
     axios
-      .get("https://7gardoon-server1.liara.run/api/mostViewPage")
+      .get("https://7gardoon-server3.liara.run/api/mostViewPage")
       .then((d) => {
         setposts(d.data.posts);
         console.log("dataaaaaaaaaaaa", d.data);

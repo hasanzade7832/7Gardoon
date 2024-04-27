@@ -45,7 +45,7 @@ const DetailsBannerForms = ({ bannerId }) => {
 
   const [posts, setPosts] = useState([-1]);
   useEffect(() => {
-    const postsUrl = `https://7gardoon-server1.liara.run/api/postRel`;
+    const postsUrl = `https://7gardoon-server3.liara.run/api/postRel`;
     axios
       .get(postsUrl)
       .then((d) => {
@@ -113,7 +113,7 @@ const DetailsBannerForms = ({ bannerId }) => {
   //     relatedPosts: relPosts,
   //   };
 
-  //   const url = `https://7gardoon-server1.liara.run/api/updatePost/${bannerId}`;
+  //   const url = `https://7gardoon-server3.liara.run/api/updatePost/${bannerId}`;
 
   //   console.log("formData", formData);
 
@@ -141,7 +141,7 @@ const DetailsBannerForms = ({ bannerId }) => {
       relatedPosts: checkedPosts,
     };
 
-    const url = `https://7gardoon-server1.liara.run/api/updatePost/${bannerId}`;
+    const url = `https://7gardoon-server3.liara.run/api/updatePost/${bannerId}`;
 
     axios
       .post(url, formData)
@@ -183,7 +183,7 @@ const DetailsBannerForms = ({ bannerId }) => {
   };
 
   const remover = () => {
-    const url = `https://7gardoon-server1.liara.run/api/deletePost/${bannerId}`;
+    const url = `https://7gardoon-server3.liara.run/api/deletePost/${bannerId}`;
 
     axios
       .post(url)
@@ -216,7 +216,7 @@ const DetailsBannerForms = ({ bannerId }) => {
 
   useEffect(() => {
     axios
-      .get(`https://7gardoon-server1.liara.run/api/postById/${bannerId}`)
+      .get(`https://7gardoon-server3.liara.run/api/postById/${bannerId}`)
       .then((d) => {
         setFullData(d.data);
         setTag(d.data.tags);
