@@ -1,7 +1,9 @@
+import ProductDetails from "../../components/productDetails";
+
 const ShopPage = () => {
   return (
     <div>
-      <span>main shop</span>
+      <ProductDetails />
     </div>
   );
 };
