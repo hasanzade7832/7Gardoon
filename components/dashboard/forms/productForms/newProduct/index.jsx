@@ -377,7 +377,7 @@ const NewProductsForms = () => {
           >
             <option value={"book"}>کتاب</option>
             <option value={"app"}>فایل گرافیکی</option>
-            <option value={"graphick"}>اپلیکیشن</option>
+            <option value={"graphic"}>اپلیکیشن</option>
           </select>
         </div>
         <div className="flex flex-col gap-2">
