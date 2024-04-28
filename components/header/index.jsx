@@ -17,7 +17,7 @@ const Header = () => {
   return (
     // اضافه کردن کلاس‌های sticky و top-0
     <header className="container mx-auto py-1 sticky top-0 bg-white z-10 shadow-effect p-10">
-      <div className="container mx-auto flex justify-between items-start">
+      <div className="flex justify-between items-start">
         <div className="p-4 rounded-lg shadow-effect">
           <Link href={"/"}>
             <div className="flex justify-center items-center">
