@@ -121,6 +121,7 @@ const NewProductsForms = () => {
       slug: slugRef.current.value,
       mainFile: mainFileRef.current.value,
       price: priceRef.current.value,
+      image: imageRef.current.value,
       imageAlt: imageAltRef.current.value,
       shortDesc: shortDescRef.current.value,
       longDesc: longDescRef.current.value,

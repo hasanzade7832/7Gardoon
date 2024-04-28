@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import Slider from "react-slick";
 import Image from "next/image";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa"; // اضافه کردن آیکون‌ها
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa"; 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
@@ -22,7 +22,7 @@ const ImageSliderWithFixedThumbnails = () => {
     slidesToScroll: 1,
     dots: false,
     afterChange: (currentSlide) => {
-      setSelectedIndex(currentSlide); // تغییر بندانگشتی هنگام حرکت اسلایدر اصلی
+      setSelectedIndex(currentSlide); 
     },
   };
 
@@ -45,10 +45,8 @@ const ImageSliderWithFixedThumbnails = () => {
   };
 
   return (
-    <div className="w-full max-w-lg mx-auto mt-10 relative">
+    <div className="w-full max-w-lg mx-auto mt-20 relative">
       {" "}
-      {/* position: relative */}
-      {/* اسلایدر اصلی */}
       <Slider {...mainSettings} ref={slider}>
         {images.map((src, index) => (
           <div key={index}>
@@ -61,7 +59,6 @@ const ImageSliderWithFixedThumbnails = () => {
           </div>
         ))}
       </Slider>
-      {/* کنترل‌های ناوبری */}
       <div className="absolute top-1/3 left-2 transform -translate-y-1/4 z-10">
         <button
           onClick={handlePrev}
@@ -78,14 +75,13 @@ const ImageSliderWithFixedThumbnails = () => {
           <FaChevronRight />
         </button>
       </div>
-      {/* تصاویر بندانگشتی ثابت */}
       <div className="flex justify-center mt-5">
         {images.map((src, index) => (
           <div
             key={index}
             style={{
               padding: "10px",
-              border: selectedIndex === index ? "2px solid yellow" : "none", // بوردر برای بندانگشتی انتخاب شده
+              border: selectedIndex === index ? "2px solid yellow" : "none", 
             }}
           >
             <Image
