@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import Slider from "react-slick";
 import Image from "next/image";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa"; 
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
@@ -22,7 +22,7 @@ const ImageSliderWithFixedThumbnails = () => {
     slidesToScroll: 1,
     dots: false,
     afterChange: (currentSlide) => {
-      setSelectedIndex(currentSlide); 
+      setSelectedIndex(currentSlide);
     },
   };
 
@@ -59,7 +59,7 @@ const ImageSliderWithFixedThumbnails = () => {
           </div>
         ))}
       </Slider>
-      <div className="absolute top-1/3 left-2 transform -translate-y-1/4 z-10">
+      <div className="absolute top-1/3 left-2 transform -translate-y-1/4 ">
         <button
           onClick={handlePrev}
           className="bg-white p-2 rounded-full shadow-lg"
@@ -67,7 +67,7 @@ const ImageSliderWithFixedThumbnails = () => {
           <FaChevronLeft />
         </button>
       </div>
-      <div className="absolute top-1/3 right-2 transform -translate-y-1/4 z-10">
+      <div className="absolute top-1/3 right-2 transform -translate-y-1/4 ">
         <button
           onClick={handleNext}
           className="bg-white p-2 rounded-full shadow-lg"
@@ -81,7 +81,7 @@ const ImageSliderWithFixedThumbnails = () => {
             key={index}
             style={{
               padding: "10px",
-              border: selectedIndex === index ? "2px solid yellow" : "none", 
+              border: selectedIndex === index ? "2px solid yellow" : "none",
             }}
           >
             <Image

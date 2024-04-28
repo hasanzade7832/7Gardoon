@@ -4,6 +4,15 @@ import React, { useState } from "react";
 import { FaStar } from "react-icons/fa";
 import SliderProductDetails from "../productSliderDetail";
 import { Link, Element } from "react-scroll";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+} from "@mui/material";
 
 const Home = () => {
   const [counter, setCounter] = useState(0);
@@ -20,12 +29,12 @@ const Home = () => {
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-100">
-      <div className="container mx-auto flex flex-grow items-center justify-center container mx-auto md:flex-row bg-white shadow-lg rounded-lg p-6 mt-10">
+      <div className="container mx-auto flex flex-grow items-evenly justify-evenly md:flex-row bg-white shadow-lg rounded-lg p-6 mt-10">
         <div className="flex-shrink-0">
           <SliderProductDetails />
         </div>
 
-        <div className="flex flex-col items-start justify-start pr-8 mt-5">
+        <div className="flex flex-col items-start justify-start pr-8 mt-20">
           <h1 className="text-3xl font-bold mb-4">پارچه پلی‌استر اصلی</h1>
 
           <div className="flex items-center mb-4">
@@ -61,134 +70,86 @@ const Home = () => {
         </div>
       </div>
 
-      {/* منوی افقی چسبنده */}
-     
-
-      {/* بخش‌های محتوا */}
-      <div className="container mx-auto flex flex-col px-6 py-4 bg-white mb-5">
-      <div className="container mx-auto sticky top-0 z-10 w-full bg-white border-b border-gray-400 shadow-md mt-5">
-        <div className="flex justify-around py-2">
+      {/* منوی افقی چسبان */}
+      <div className="container mx-auto sticky" style={{ top: 168 }}>
+        <div className="flex justify-start px-4 py-2 bg-stone-100 border-b border-gray-600 shadow-md">
           <Link
             to="sectionA"
             smooth={true}
-            className="cursor-pointer text-lg border-gray-400 pb-1"
+            className="cursor-pointer text-lg px-10"
           >
-            A
+            جزئیات
           </Link>
           <Link
             to="sectionB"
             smooth={true}
-            className="cursor-pointer text-lg border-gray-400 pb-1"
+            className="cursor-pointer text-lg px-10"
           >
-            B
+            اطلاعات بیشتر
           </Link>
           <Link
             to="sectionC"
             smooth={true}
-            className="cursor-pointer text-lg border-gray-400 pb-1"
+            className="cursor-pointer text-lg px-10"
           >
-            C
+            مرور
           </Link>
           <Link
             to="sectionD"
             smooth={true}
-            className="cursor-pointer text-lg border-gray-400 pb-1"
+            className="cursor-pointer text-lg px-10"
           >
-            D
+            ترکیبات
           </Link>
         </div>
       </div>
-        <Element name="sectionA" className="mt-5">
-          <h2 className="text-2xl">بخش A</h2>
-          <p>این بخش مربوط به قسمت A است.</p>
-          <p>این بخش مربوط به قسمت A است.</p>
-          <p>این بخش مربوط به قسمت A است.</p>
-          <p>این بخش مربوط به قسمت A است.</p>
-          <p>این بخش مربوط به قسمت A است.</p>
-          <p>این بخش مربوط به قسمت A است.</p>
-          <p>این بخش مربوط به قسمت A است.</p>
-          <p>این بخش مربوط به قسمت A است.</p>
-          <p>این بخش مربوط به قسمت A است.</p>
-          <p>این بخش مربوط به قسمت A است.</p>
-          <p>این بخش مربوط به قسمت A است.</p>
-          <p>این بخش مربوط به قسمت A است.</p>
-          <p>این بخش مربوط به قسمت A است.</p>
-          <p>این بخش مربوط به قسمت A است.</p>
-          <p>این بخش مربوط به قسمت A است.</p>
-          <p>این بخش مربوط به قسمت A است.</p>
-          <p>این بخش مربوط به قسمت A است.</p>
-          <p>این بخش مربوط به قسمت A است.</p>
-          <p>این بخش مربوط به قسمت A است.</p>
-          <p>این بخش مربوط به قسمت A است.</p>
-          <p>این بخش مربوط به قسمت A است.</p>
-          <p>این بخش مربوط به قسمت A است.</p>
+
+      <div className="container mx-auto flex flex-col px-6 py-4 bg-white mb-5">
+        <Element name="sectionA">
+          <hr className="my-4" />
+          <p className="my-6">پارچه پلی‌استر اصلی</p>
+          <p className="my-6">ترکیب: 100٪ پلی‌استر</p>
+          <p className="my-6">ترکیب: 100٪ پلی‌استر</p>
+          <p className="my-6">ترکیب: 100٪ پلی‌استر</p>
+          <p className="my-6">ترکیب: 100٪ پلی‌استر</p>
+          <p className="my-6">ترکیب: 100٪ پلی‌استر</p>
+          <p className="my-6">ترکیب: 100٪ پلی‌استر</p>
+          <p className="my-6">ترکیب: 100٪ پلی‌استر</p>
         </Element>
-        <hr className="my-4" />
         <Element name="sectionB">
-          <h2 className="text-2xl">بخش B</h2>
-          <p>این بخش مربوط به قسمت A است.</p>
-          <p>این بخش مربوط به قسمت A است.</p>
-          <p>این بخش مربوط به قسمت A است.</p>
-          <p>این بخش مربوط به قسمت A است.</p>
-          <p>این بخش مربوط به قسمت A است.</p>
-          <p>این بخش مربوط به قسمت A است.</p>
-          <p>این بخش مربوط به قسمت A است.</p>
-          <p>این بخش مربوط به قسمت A است.</p>
-          <p>این بخش مربوط به قسمت A است.</p>
-          <p>این بخش مربوط به قسمت A است.</p>
-          <p>این بخش مربوط به قسمت A است.</p>
-          <p>این بخش مربوط به قسمت A است.</p>
-          <p>این بخش مربوط به قسمت A است.</p>
-          <p>این بخش مربوط به قسمت A است.</p>
-          <p>این بخش مربوط به قسمت A است.</p>
-          <p>این بخش مربوط به قسمت A است.</p>
-          <p>این بخش مربوط به قسمت A است.</p>
-          <p>این بخش مربوط به قسمت A است.</p>
-          <p>این بخش مربوط به قسمت A است.</p>
-          <p>این بخش مربوط به قسمت A است.</p>
-          <p>این بخش مربوط به قسمت A است.</p>
+          <div style={{ height: "50px" }}></div> {/* فضای اضافی */}
+          <hr className="my-4" />
+          <p className>پارچه پلی‌استر اصلی</p>
+          <p className="my-6">ترکیب: 100٪ پلی‌استر</p>
+          <p className="my-6">ترکیب: 100٪ پلی‌استر</p>
+          <p className="my-6">ترکیب: 100٪ پلی‌استر</p>
+          <p className="my-6">ترکیب: 100٪ پلی‌استر</p>
+          <p className="my-6">ترکیب: 100٪ پلی‌استر</p>
+          <p className="my-6">ترکیب: 100٪ پلی‌استر</p>
         </Element>
-        <hr className="my-4" />
         <Element name="sectionC">
-          <h2 className="text-2xl">بخش C</h2>
-          <p>این بخش مربوط به قسمت C است.</p>
-          <p>این بخش مربوط به قسمت C است.</p>
-          <p>این بخش مربوط به قسمت C است.</p>
-          <p>این بخش مربوط به قسمت C است.</p>
-          <p>این بخش مربوط به قسمت C است.</p>
-          <p>این بخش مربوط به قسمت C است.</p>
-          <p>این بخش مربوط به قسمت C است.</p>
-          <p>این بخش مربوط به قسمت C است.</p>
-          <p>این بخش مربوط به قسمت C است.</p>
-          <p>این بخش مربوط به قسمت C است.</p>
-          <p>این بخش مربوط به قسمت C است.</p>
-          <p>این بخش مربوط به قسمت C است.</p>
-          <p>این بخش مربوط به قسمت C است.</p>
-          <p>این بخش مربوط به قسمت C است.</p>
-          <p>این بخش مربوط به قسمت C است.</p>
-          <p>این بخش مربوط به قسمت C است.</p>
-          <p>این بخش مربوط به قسمت C است.</p>
+          <div style={{ height: "50px" }}></div> {/* فضای اضافی */}
+          <hr className="my-4" />
+          <p class="my-6">پارچه پلی‌استر اصلی</p>
+          <p className="my-6">ترکیب: 100٪ پلی‌استر</p>
+          <p className="my-6">ترکیب: 100٪ پلی‌استر</p>
+          <p className="my-6">ترکیب: 100٪ پلی‌استر</p>
+          <p className="my-6">ترکیب: 100٪ پلی‌استر</p>
+          <p className="my-6">ترکیب: 100٪ پلی‌استر</p>
+          <p className="my-6">ترکیب: 100٪ پلی‌استر</p>
+          <p className="my-6">ترکیب: 100٪ پلی‌استر</p>
+          <p className="my-6">ترکیب: 100٪ پلی‌استر</p>
+          <p className="my-6">ترکیب: 100٪ پلی‌استر</p>
+          <p className="my-6">ترکیب: 100٪ پلی‌استر</p>
         </Element>
-        <hr className="my-4" />
         <Element name="sectionD">
-          <h2 className="text-2xl">بخش D</h2>
-          <p>این بخش مربوط به قسمت D است.</p>
-          <p>این بخش مربوط به قسمت D است.</p>
-          <p>این بخش مربوط به قسمت D است.</p>
-          <p>این بخش مربوط به قسمت D است.</p>
-          <p>این بخش مربوط به قسمت D است.</p>
-          <p>این بخش مربوط به قسمت D است.</p>
-          <p>این بخش مربوط به قسمت D است.</p>
-          <p>این بخش مربوط به قسمت D است.</p>
-          <p>این بخش مربوط به قسمت D است.</p>
-          <p>این بخش مربوط به قسمت D است.</p>
-          <p>این بخش مربوط به قسمت D است.</p>
-          <p>این بخش مربوط به قسمت D است.</p>
-          <p>این بخش مربوط به قسمت D است.</p>
-          <p>این بخش مربوط به قسمت D است.</p>
-          <p>این بخش مربوط به قسمت D است.</p>
-          <p>این بخش مربوط به قسمت D است.</p>
-          <p>این بخش مربوط به قسمت D است.</p>
+          <div style={{ height: "50px" }}></div> {/* فضای اضافی */}
+          <hr className="my-4" />
+          <p class="my-6">پارچه پلی‌استر اصلی</p>
+          <p className="my-6">ترکیب: 100٪ پلی‌استر</p>
+          <p className="my-6">ترکیب: 100٪ پلی‌استر</p>
+          <p className="my-6">ترکیب: 100٪ پلی‌استر</p>
+          <p className="my-6">ترکیب: 100٪ پلی‌استر</p>
         </Element>
       </div>
     </div>
