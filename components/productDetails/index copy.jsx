@@ -20,7 +20,7 @@ const Home = () => {
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-100">
-      <div className="container mx-auto flex flex-grow items-center justify-center container mx-auto md:flex-row bg-white shadow-lg rounded-lg p-6 mt-10">
+      <div className="flex flex-grow items-center justify-center container mx-auto md:flex-row bg-white shadow-lg rounded-lg p-6">
         <div className="flex-shrink-0">
           <SliderProductDetails />
         </div>
@@ -65,7 +65,7 @@ const Home = () => {
      
 
       {/* بخش‌های محتوا */}
-      <div className="container mx-auto flex flex-col px-6 py-4 bg-white mb-5">
+      <div className="container mx-auto flex flex-col px-6 py-4 bg-white mt-5">
       <div className="container mx-auto sticky top-0 z-10 w-full bg-white border-b border-gray-400 shadow-md mt-5">
         <div className="flex justify-around py-2">
           <Link
