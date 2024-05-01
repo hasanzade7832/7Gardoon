@@ -35,7 +35,7 @@ const DetailsCategoryForms = ({ bannerId }) => {
       minute: "2-digit",
     }),
   };
-  const url = `https://7gardoon-server3.liara.run/api/updateCategories/${bannerId}`;
+  const url = `https://7gardoon-servers.liara.run/api/updateCategories/${bannerId}`;
   
   axios
   .post(url, formData)
@@ -77,7 +77,7 @@ const DetailsCategoryForms = ({ bannerId }) => {
   };
 
   const remover = () => {
-    const url = `https://7gardoon-server3.liara.run/api/deleteCategories/${bannerId}`;
+    const url = `https://7gardoon-servers.liara.run/api/deleteCategories/${bannerId}`;
     axios
       .post(url)
       .then((d) => {
@@ -110,7 +110,7 @@ const DetailsCategoryForms = ({ bannerId }) => {
   useEffect(() => {
     axios
       .get(
-        `https://7gardoon-server3.liara.run/api/get-categoryById/${bannerId}`
+        `https://7gardoon-servers.liara.run/api/get-categoryById/${bannerId}`
       )
       .then((d) => {
         setFullData(d.data);

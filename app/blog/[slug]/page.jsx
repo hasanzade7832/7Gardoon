@@ -11,7 +11,7 @@ import MostViewdPage from "@/components/mostViewedPost";
 
 const getData = async (slug) => {
   const data = await fetch(
-    `https://7gardoon-server3.liara.run/api/post/${slug}`,
+    `https://7gardoon-servers.liara.run/api/post/${slug}`,
     { cache: "no-store" }
   );
   return data.json();

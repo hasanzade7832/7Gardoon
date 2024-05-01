@@ -19,7 +19,7 @@ const NewPostsForms = () => {
 
   const [posts, setPosts] = useState([-1]);
   useEffect(() => {
-    const postsUrl = `https://7gardoon-server3.liara.run/api/postRel`;
+    const postsUrl = `https://7gardoon-servers.liara.run/api/postRel`;
     axios
       .get(postsUrl)
       .then((d) => {
@@ -69,7 +69,7 @@ const NewPostsForms = () => {
       relatedPosts: relPosts,
     };
 
-    const url = `https://7gardoon-server3.liara.run/api/newPost`;
+    const url = `https://7gardoon-servers.liara.run/api/newPost`;
 
     console.log("formData", formData);
 

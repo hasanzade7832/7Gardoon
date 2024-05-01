@@ -31,12 +31,12 @@ const AllSlidersForms = ({ setBannerDetail, setRandNumForBannerClick }) => {
 
   const [filterBtns, setFilterBtns] = useState([-1]);
 
-  const paginate =10;
+  const paginate =1
 
   useEffect(() => {
     axios
       .get(
-        `https://7gardoon-server3.liara.run/api/sliders?pn=${pageNumber}&&pgn=${paginate}`
+        `https://7gardoon-servers.liara.run/api/sliders?pn=${pageNumber}&&pgn=${paginate}`
       )
       .then((res) => {
         setSliders(res.data.sliders);
@@ -118,10 +118,13 @@ const AllSlidersForms = ({ setBannerDetail, setRandNumForBannerClick }) => {
         ) : (
           filterBtns.map((data, i) => (
             <button
-              className="bg-indigo-500 text-white w-8 h-8 flex justify-center items-center rounded transition-all duration-500 hover:bg-orange-500"
+            className={
+              data+1==pageNumber ? "bg-orange-400 text-white w-8 h-8 flex justify-center items-center rounded transition-all duration-500 hover:bg-orange-500" :
+              "bg-indigo-500 text-white w-8 h-8 flex justify-center items-center rounded transition-all duration-500 hover:bg-orange-500"
+            }
               onClick={() => {
+                data+1==pageNumber?console.log(""):setSliders([-1])
                 setPageNumber(data + 1);
-                setSliders([-1]);
                 goTopCtrl();
               }}
               key={i}

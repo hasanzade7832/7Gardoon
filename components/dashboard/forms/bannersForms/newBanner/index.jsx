@@ -26,7 +26,7 @@ const NewBannerForms = () => {
       }),
     };
 
-    const url = `https://7gardoon-server3.liara.run/api/newBanners`;
+    const url = `https://7gardoon-servers.liara.run/api/newBanners`;
 
     axios
       .post(url, formData)

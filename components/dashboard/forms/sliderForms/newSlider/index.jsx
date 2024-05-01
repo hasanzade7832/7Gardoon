@@ -28,7 +28,7 @@ const NewSliderForms = () => {
       }),
     };
 
-    const url = `https://7gardoon-server3.liara.run/api/newSliders`;
+    const url = `https://7gardoon-servers.liara.run/api/newSliders`;
 
     axios
       .post(url, formData)

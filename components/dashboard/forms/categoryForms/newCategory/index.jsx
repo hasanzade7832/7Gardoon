@@ -31,7 +31,7 @@ const NewCategories = () => {
       }),
     };
 
-    const url = `https://7gardoon-server3.liara.run/api/newCategories`;
+    const url = `https://7gardoon-servers.liara.run/api/newCategories`;
 
     console.log("title",titleRef.current.value);
     console.log("slug",slugRef.current.value);

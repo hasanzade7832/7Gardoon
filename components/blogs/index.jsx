@@ -1,7 +1,7 @@
 import BlogBox from "./blogBox";
 
 const getData = async () => {
-  const maindata = await fetch("https://7gardoon-server3.liara.run/api/activePost");
+  const maindata = await fetch("https://7gardoon-servers.liara.run/api/activePost");
   return maindata.json();
 };
 

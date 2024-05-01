@@ -20,7 +20,7 @@ const NewProductsForms = () => {
 
   const [products, setProducts] = useState([-1]);
   useEffect(() => {
-    const productsUrl = `https://7gardoon-server3.liara.run/api/productRel`;
+    const productsUrl = `https://7gardoon-servers.liara.run/api/productRel`;
     axios
       .get(productsUrl)
       .then((d) => {
@@ -44,7 +44,7 @@ const NewProductsForms = () => {
 
   const [Categories, setCategories] = useState([-1]);
   useEffect(() => {
-    const categoriesUrl = `https://7gardoon-server3.liara.run/api/categoryRel`;
+    const categoriesUrl = `https://7gardoon-servers.liara.run/api/categoryRel`;
     axios
       .get(categoriesUrl)
       .then((d) => {
@@ -135,7 +135,7 @@ const NewProductsForms = () => {
       relatedProducts: relProducts,
     };
 
-    const url = `https://7gardoon-server3.liara.run/api/newProduct`;
+    const url = `https://7gardoon-servers.liara.run/api/newProduct`;
 
     // setRelProducts([]);
     // const checkboxes = document.querySelectorAll('input[type="checkbox"]');
