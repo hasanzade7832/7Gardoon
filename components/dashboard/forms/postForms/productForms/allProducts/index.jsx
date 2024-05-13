@@ -96,7 +96,7 @@ const AllProductsForms = ({ setBannerDetail, setRandNumForBannerClick }) => {
                 : "bg-yellow-400 p-2 rounded border-2 border-black"
             }
           >
-            همه دسته بندی ها
+            همه دسته بندی هابثقبلق
           </button>
           <button
             onClick={() => {
@@ -187,11 +187,15 @@ const AllProductsForms = ({ setBannerDetail, setRandNumForBannerClick }) => {
         ) : (
           filterBtns.map((data, i) => (
             <button
-              className="bg-indigo-500 text-white w-8 h-8 flex justify-center items-center rounded transition-all duration-500 hover:bg-orange-500"
+            className={
+              data+1 == pageNumber ? "bg-indigo-400 text-white w-8 h-8 flex justify-center items-center rounded transition-all duration-500 hover:bg-orange-500" :
+              "bg-indigo-500 text-white w-8 h-8 flex justify-center items-center rounded transition-all duration-500 hover:bg-orange-500"
+            }
               onClick={() => {
                 setPageNumber(data + 1);
                 setPosts([-1]);
                 goTopCtrl();
+                
               }}
               key={i}
             >

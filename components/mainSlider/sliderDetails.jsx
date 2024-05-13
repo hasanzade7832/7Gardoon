@@ -30,7 +30,7 @@ const SliderDetails = ({ data }) => {
         {data.length < 1 ? (
           <div></div>
         ) : (
-          <section className="container mx-auto flex flex-col gap-40 relative p-2 mt-10">
+          <section className="container mx-auto  flex flex-col gap-40 relative p-2 mt-10 z-10">
             <div className="z-30 btns absolute left-4 top-4 flex gap-1">
               <FaChevronRight
                 onClick={() => {

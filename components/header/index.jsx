@@ -16,7 +16,7 @@ import { LuShoppingCart } from "react-icons/lu";
 const Header = () => {
   return (
     // اضافه کردن کلاس‌های sticky و top-0
-    <header className="py-1 sticky top-0 bg-white z-10 shadow-effect p-10">
+    <header className="py-1 sticky top-0 bg-white z-40 shadow-effect p-10">
       <div className="flex justify-between items-start">
         <div className="p-4 rounded-lg shadow-effect">
           <Link href={"/"}>
